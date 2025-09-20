@@ -1,7 +1,7 @@
 ---
 tags: ['Next.js', 'VS Code', 'Docker', 'DevOps']
 draft: false
-title: "How to Create a VS Code Dev Container for Your Next.js App"
+title: 'How to Create a VS Code Dev Container for Your Next.js App'
 summary: "Want a clean, consistent, and portable development environment for your Next.js projects? Let's walk through how to set up a VS Code Development Container step-by-step."
 date: 2025-01-05
 images: []
@@ -20,14 +20,16 @@ In this guide, we'll walk through how to set up a simple and clean dev container
 ## What You'll Get
 
 This setup is designed to be minimal but powerful, giving you everything you need to get started:
--   **Node.js & TypeScript:** The core of any modern Next.js project.
--   **Docker:** The container technology that makes this all possible.
--   **Git:** Full Git integration, right inside the container.
--   **Fast Refresh:** Next.js's instant feedback feature works perfectly.
+
+- **Node.js & TypeScript:** The core of any modern Next.js project.
+- **Docker:** The container technology that makes this all possible.
+- **Git:** Full Git integration, right inside the container.
+- **Fast Refresh:** Next.js's instant feedback feature works perfectly.
 
 ## Before You Start: The Prerequisites
 
 To get this working, you'll need a couple of things installed on your main computer (your "host" machine):
+
 1.  **VS Code:** The code editor we'll be using.
 2.  **The Dev Containers extension for VS Code:** This is the magic that connects VS Code to the Docker container.
 3.  **Docker Desktop:** The application that manages and runs your containers.
@@ -41,7 +43,7 @@ The easiest way is to use the **"Dev Containers: Open Folder in Container..."** 
 
 ## Setting Up Your Next.js App
 
-Once VS Code has built and connected to your container, you'll have a terminal that is running *inside* the container. From here, you can set up your Next.js project. You have two main options.
+Once VS Code has built and connected to your container, you'll have a terminal that is running _inside_ the container. From here, you can set up your Next.js project. You have two main options.
 
 **Option 1: Create a New App**
 You can use the standard `create-next-app` command to start a fresh project. This is the best option if you're starting from scratch.

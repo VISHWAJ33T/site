@@ -1,5 +1,5 @@
 ---
-title: "Less is More: The Power of Fewer Function Arguments"
+title: 'Less is More: The Power of Fewer Function Arguments'
 alias: Minimal Function Arguments, Limited Function Arguments
 draft: false
 tags: ['Code Quality', 'Best Practices', 'Functions']
@@ -58,9 +58,9 @@ function calculateTotalPrice(
   discount: number,
   shippingFee: number
 ): number {
-  const tax = itemPrice * taxRate;
-  const discountedPrice = itemPrice * (1 - discount);
-  return discountedPrice + tax + shippingFee;
+  const tax = itemPrice * taxRate
+  const discountedPrice = itemPrice * (1 - discount)
+  return discountedPrice + tax + shippingFee
 }
 ```
 
@@ -74,10 +74,10 @@ function calculateTotalPrice(
   itemPrice: number,
   options: { taxRate: number; discount: number; shippingFee: number }
 ): number {
-  const { taxRate, discount, shippingFee } = options;
-  const tax = itemPrice * taxRate;
-  const discountedPrice = itemPrice * (1 - discount);
-  return discountedPrice + tax + shippingFee;
+  const { taxRate, discount, shippingFee } = options
+  const tax = itemPrice * taxRate
+  const discountedPrice = itemPrice * (1 - discount)
+  return discountedPrice + tax + shippingFee
 }
 ```
 

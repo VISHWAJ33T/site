@@ -33,7 +33,7 @@ The biggest win is **development efficiency**. The time you don't spend on tiny,
 
 However, this doesn't mean you should never think about performance. If you ignore optimization completely, you can miss real opportunities to make your application faster and more efficient. Neglecting performance entirely can lead to genuinely slow, frustrating experiences for your users, especially in applications that handle a lot of data or traffic.
 
-An un-optimized application can also be wasteful, using more memory or network bandwidth than necessary. While you shouldn't obsess over every byte, being mindful of resource usage is part of writing professional-quality software. The goal is not to *never* optimize, but to optimize *wisely*.
+An un-optimized application can also be wasteful, using more memory or network bandwidth than necessary. While you shouldn't obsess over every byte, being mindful of resource usage is part of writing professional-quality software. The goal is not to _never_ optimize, but to optimize _wisely_.
 
 ## A Classic Example: The "Optimized" Loop
 

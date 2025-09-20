@@ -1,12 +1,12 @@
 interface Experience {
-  role: string;
-  company: string;
-  companyUrl: string;
-  logoUrl: string;
-  period: string;
-  location: string;
-  description: string[];
-  skills: string[];
+  role: string
+  company: string
+  companyUrl: string
+  logoUrl: string
+  period: string
+  location: string
+  description: string[]
+  skills: string[]
 }
 
 const experienceData: Experience[] = [
@@ -142,6 +142,6 @@ const experienceData: Experience[] = [
       'Wagmi',
     ],
   },
-];
+]
 
-export default experienceData;
+export default experienceData

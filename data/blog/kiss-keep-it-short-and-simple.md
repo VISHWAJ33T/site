@@ -20,11 +20,11 @@ When you're writing code, it's easy to fall into the trap of building something 
 
 So, how do you put this into practice? Here are a few tips to help you keep your code simple and clean.
 
--   **Don't Over-Engineer:** It's tempting to build a solution that can handle every possible future problem. Don't. Solve the problem you have right now, and trust that you can adapt later if needed.
--   **Small is Beautiful:** Break down big problems into smaller, bite-sized functions. A function that does one thing well is always better than a monster function that tries to do everything.
--   **Keep Logic Simple:** Avoid deep nests of `if/else` statements or complicated loops. There's almost always a simpler, more readable way to write your logic.
--   **Fewer Dependencies:** Every library or tool you add to your project brings its own complexity. Only add what you truly need.
--   **Clean As You Go:** Don't be afraid to refactor. If you see a way to simplify a piece of code, do it! A little cleanup now saves a lot of headaches later.
+- **Don't Over-Engineer:** It's tempting to build a solution that can handle every possible future problem. Don't. Solve the problem you have right now, and trust that you can adapt later if needed.
+- **Small is Beautiful:** Break down big problems into smaller, bite-sized functions. A function that does one thing well is always better than a monster function that tries to do everything.
+- **Keep Logic Simple:** Avoid deep nests of `if/else` statements or complicated loops. There's almost always a simpler, more readable way to write your logic.
+- **Fewer Dependencies:** Every library or tool you add to your project brings its own complexity. Only add what you truly need.
+- **Clean As You Go:** Don't be afraid to refactor. If you see a way to simplify a piece of code, do it! A little cleanup now saves a lot of headaches later.
 
 ## The Good and The Not-So-Good
 
@@ -32,16 +32,16 @@ Like any principle, KISS has its ups and downs.
 
 ### The Awesome Parts (Pros)
 
--   **Easier to Maintain:** Simple code is a gift to your future self (and your teammates). It's easier to understand, which makes fixing bugs or adding features a breeze.
--   **Super Readable:** Anyone should be able to look at your code and get the gist of what it's doing without needing a decoder ring.
--   **Faster to Develop:** Simple solutions are usually faster to build. Less time wrestling with complexity means more time shipping features.
--   **Easy for Newbies:** A simple codebase is much easier for new developers to jump into and start contributing.
+- **Easier to Maintain:** Simple code is a gift to your future self (and your teammates). It's easier to understand, which makes fixing bugs or adding features a breeze.
+- **Super Readable:** Anyone should be able to look at your code and get the gist of what it's doing without needing a decoder ring.
+- **Faster to Develop:** Simple solutions are usually faster to build. Less time wrestling with complexity means more time shipping features.
+- **Easy for Newbies:** A simple codebase is much easier for new developers to jump into and start contributing.
 
 ### The Tricky Parts (Cons)
 
--   **Finding the Balance:** Sometimes, a "simple" solution might not be the most performant. It's all about finding the right balance for your needs.
--   **Can Be Too Rigid:** A super-simple design might not be flexible enough to handle future changes. You have to think about what might change, without over-engineering for it.
--   **Don't Oversimplify:** Some problems are just plain complex. Trying to force an overly simple solution on a complex problem can create a bigger mess.
+- **Finding the Balance:** Sometimes, a "simple" solution might not be the most performant. It's all about finding the right balance for your needs.
+- **Can Be Too Rigid:** A super-simple design might not be flexible enough to handle future changes. You have to think about what might change, without over-engineering for it.
+- **Don't Oversimplify:** Some problems are just plain complex. Trying to force an overly simple solution on a complex problem can create a bigger mess.
 
 ## Let's See It in Action
 
@@ -65,7 +65,7 @@ function calculateAverage(numbers: number[]): number {
 
 ### The Simple (KISS) Way
 
-This version uses the built-in `reduce` method, which is cleaner and expresses the *intent* of the code more clearly: we're reducing the array to a single value (the sum).
+This version uses the built-in `reduce` method, which is cleaner and expresses the _intent_ of the code more clearly: we're reducing the array to a single value (the sum).
 
 ```typescript
 // Good example: Simplified code
@@ -79,8 +79,8 @@ function calculateAverage(numbers: number[]): number {
 
 The KISS principle plays well with other coding philosophies:
 
--   [**DRY (Don't Repeat Yourself)**](/blog/dont-repeat-yourself-dry): If you're not repeating code, it's usually simpler.
--   [**YAGNI (You Ain't Gonna Need It)**](/blog/you-aint-gonna-need-it-yagni): Don't add features you don't need. Simpler, right?
+- [**DRY (Don't Repeat Yourself)**](/blog/dont-repeat-yourself-dry): If you're not repeating code, it's usually simpler.
+- [**YAGNI (You Ain't Gonna Need It)**](/blog/you-aint-gonna-need-it-yagni): Don't add features you don't need. Simpler, right?
 
 ## Words of Wisdom
 

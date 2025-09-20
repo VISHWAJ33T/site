@@ -68,9 +68,7 @@ const projectsData: Project[] = [
     description:
       'A Web3 "spot-the-ball" game featuring dynamic contracts with randomness secured by Supra dVRF, hosting weekly competitions for over 3000 players.',
     imgSrc: '/static/images/projects/minimatch.png',
-    links: [
-      { text: 'Live', href: 'https://minimatch.gg' },
-    ],
+    links: [{ text: 'Live', href: 'https://minimatch.gg' }],
     badges: ['Web3', 'Gaming', 'Competition'],
     contribution: [
       'Engineered a high-performance leaderboard with dynamic points calculation and pagination using Firestore.',

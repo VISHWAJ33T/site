@@ -1,5 +1,5 @@
 ---
-title: "Composition vs. Inheritance: Which Should You Choose?"
+title: 'Composition vs. Inheritance: Which Should You Choose?'
 draft: false
 tags: ['OOP', 'Architecture', 'Best Practices']
 date: 2024-04-21
@@ -14,8 +14,9 @@ publish: true
 When we write code using classes, we're creating blueprints for objects. A big part of making good blueprints is figuring out how they should relate to each other. Two of the most common ways to do this are **Inheritance** and **Composition**.
 
 Think of it like this:
--   **Inheritance** is like a **family tree**. A `GoldenRetriever` class can *inherit* from a `Dog` class. The retriever gets all the general doggy traits (like `bark()` and `wagTail()`) automatically, and then can add its own specific traits (like `isAlwaysHappy: true`).
--   **Composition** is like building with **LEGOs**. You create a `Car` class not by inheriting from a single "Vehicle" blueprint, but by *composing* it from smaller, independent parts. The `Car` object *has-a* `Wheel`, it *has-an* `Engine`, it *has-a* `SteeringWheel`. Each part is its own self-contained object.
+
+- **Inheritance** is like a **family tree**. A `GoldenRetriever` class can _inherit_ from a `Dog` class. The retriever gets all the general doggy traits (like `bark()` and `wagTail()`) automatically, and then can add its own specific traits (like `isAlwaysHappy: true`).
+- **Composition** is like building with **LEGOs**. You create a `Car` class not by inheriting from a single "Vehicle" blueprint, but by _composing_ it from smaller, independent parts. The `Car` object _has-a_ `Wheel`, it _has-an_ `Engine`, it _has-a_ `SteeringWheel`. Each part is its own self-contained object.
 
 So, how do you know whether to build a family tree or a LEGO set? It all comes down to the relationship between your objects.
 
@@ -53,41 +54,43 @@ Imagine you have an `Employee` class, and you want to store their tax data. You 
 // This is confusing because tax data IS NOT a type of employee.
 class Employee {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
 }
 
 class EmployeeTaxData extends Employee {
   constructor(salary) {
-    super();
-    this.salary = salary;
+    super()
+    this.salary = salary
   }
 }
 ```
-This doesn't make logical sense. `EmployeeTaxData` is not a more specific *type* of `Employee`.
+
+This doesn't make logical sense. `EmployeeTaxData` is not a more specific _type_ of `Employee`.
 
 ### The Right Way (Using "Has-A")
 
-A much cleaner way is to say that an `Employee` *has-a* set of tax data.
+A much cleaner way is to say that an `Employee` _has-a_ set of tax data.
 
 ```javascript
 // This makes perfect sense! An employee HAS tax data.
 class EmployeeTaxData {
   constructor(salary) {
-    this.salary = salary;
+    this.salary = salary
   }
 }
 
 class Employee {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
 
   setTaxData(salary) {
-    this.taxData = new EmployeeTaxData(salary);
+    this.taxData = new EmployeeTaxData(salary)
   }
 }
 ```
+
 This is a much more logical and flexible design.
 
 ## The Takeaway

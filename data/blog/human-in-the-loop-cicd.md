@@ -1,6 +1,6 @@
 ---
 draft: false
-title: "Human-in-the-Loop CI/CD: When to Pump the Brakes on Automation"
+title: 'Human-in-the-Loop CI/CD: When to Pump the Brakes on Automation'
 summary: "Automation in CI/CD is amazing, but sometimes you need a human touch. Let's explore when and how to strategically add manual steps to your pipeline without slowing everything down."
 date: '2024-10-24'
 images: []
@@ -21,11 +21,11 @@ Now, if you're reading this, I'm assuming you've already dabbled in CI/CD pipeli
 
 Before you get too excited and dive into the code snippets, make sure you've got a few things in place:
 
--   **Jenkins Installed:** You've probably already done this, but just in case—ensure you've got Jenkins installed and running on your system. If not, a quick "sudo apt-get install jenkins" should get you there, assuming you have Java installed (you do, right?).
--   **Jenkins Pipeline Knowledge:** You should already know how to set up a basic Jenkins pipeline—none of that "click around the UI and pray" business. If you're fuzzy on pipelines, go ahead and brush up on that first.
--   **Git and GitHub:** Since we'll be pulling code from repositories, make sure you've got Git set up and have a repository you can use for testing.
--   **Access to Production Environment:** No kidding, don't do this in production. Or do, but don't say I didn't warn you.
--   **Basic CI/CD Knowledge:** Again, this is advanced stuff. So, if you're still figuring out what the "CD" in CI/CD stands for, it's best to go read up on that first.
+- **Jenkins Installed:** You've probably already done this, but just in case—ensure you've got Jenkins installed and running on your system. If not, a quick "sudo apt-get install jenkins" should get you there, assuming you have Java installed (you do, right?).
+- **Jenkins Pipeline Knowledge:** You should already know how to set up a basic Jenkins pipeline—none of that "click around the UI and pray" business. If you're fuzzy on pipelines, go ahead and brush up on that first.
+- **Git and GitHub:** Since we'll be pulling code from repositories, make sure you've got Git set up and have a repository you can use for testing.
+- **Access to Production Environment:** No kidding, don't do this in production. Or do, but don't say I didn't warn you.
+- **Basic CI/CD Knowledge:** Again, this is advanced stuff. So, if you're still figuring out what the "CD" in CI/CD stands for, it's best to go read up on that first.
 
 With that out of the way, let's get into the good stuff.
 
@@ -35,9 +35,9 @@ At the heart of any DevOps pipeline is one goal: automation. We automate testing
 
 So, why would we want to disrupt our lovely automated pipelines with manual intervention? Simple—because not every scenario is predictable, and there are things that automation just doesn't handle well:
 
--   **Critical Production Deployments:** Automation is awesome for routine deployments, but pushing a major release into production can be nerve-wracking. This is when you want a human to step in and give the final approval, making sure nothing is overlooked.
--   **Security Vulnerability Checks:** Automated security scans can flag issues, but a human might need to assess whether a vulnerability is critical or not. It's better to have someone verify that Jenkins didn't cry wolf before rolling out the change.
--   **Non-Deterministic Failures:** Automated tests can sometimes be flaky, producing inconsistent results. A human eye is often needed to decide whether the test is legitimately failing or if Jenkins just had a bad day.
+- **Critical Production Deployments:** Automation is awesome for routine deployments, but pushing a major release into production can be nerve-wracking. This is when you want a human to step in and give the final approval, making sure nothing is overlooked.
+- **Security Vulnerability Checks:** Automated security scans can flag issues, but a human might need to assess whether a vulnerability is critical or not. It's better to have someone verify that Jenkins didn't cry wolf before rolling out the change.
+- **Non-Deterministic Failures:** Automated tests can sometimes be flaky, producing inconsistent results. A human eye is often needed to decide whether the test is legitimately failing or if Jenkins just had a bad day.
 
 In short, HITL in CI/CD is all about introducing a layer of human judgment—something that automation (for now) can't replicate.
 
@@ -89,6 +89,7 @@ pipeline {
     }
 }
 ```
+
 In this case, once the tests pass, Jenkins pauses and asks for approval before proceeding with deployment. You've essentially inserted a "hold up, let's double-check" step into your pipeline.
 
 ### Dealing with Non-Deterministic Test Results
@@ -103,7 +104,7 @@ Security is a big deal. Jenkins can run security tests all day long, but when it
 
 ## Practical Techniques for Manual Intervention
 
-Now that we've gone over the *when*, let's dive into the *how*. When you think of adding manual steps to your pipeline, the goal is to keep the flow efficient without turning your shiny automated process into a bureaucratic nightmare.
+Now that we've gone over the _when_, let's dive into the _how_. When you think of adding manual steps to your pipeline, the goal is to keep the flow efficient without turning your shiny automated process into a bureaucratic nightmare.
 
 ### Approval Gates and Conditional Steps
 
@@ -172,6 +173,7 @@ pipeline {
     }
 }
 ```
+
 This little nugget ensures that manual approval only kicks in when it's absolutely necessary—like when you're about to deploy to production. For other branches or less critical environments, Jenkins will breeze right through, saving you (and your team) from unnecessary hand-holding.
 
 ### Feature Flags and Rollbacks: The Unsung Heroes
@@ -239,6 +241,7 @@ Let's step out of the abstract and into the real world, where pipelines don't al
 Let's talk about a FinTech company—because if there's one sector that loses its mind over security, it's finance. This company was rolling out an update to their mobile app, and while they had a pretty robust automated testing setup, security compliance was a nightmare. Any potential vulnerability could mean regulatory violations, millions in fines, or worse—a breach of customer data. Yikes.
 
 They introduced manual approval steps right after their security scans in Jenkins. Here's how it worked:
+
 1. Jenkins automatically built and tested the code.
 2. An automated security scan flagged vulnerabilities.
 3. Before deployment to production, the pipeline paused for a security review, which had to be manually approved by the security team.
@@ -252,6 +255,7 @@ Now, imagine you're working for a big e-commerce platform. Black Friday is aroun
 In this case, Jenkins was doing most of the heavy lifting. The pipeline ran automated tests, built the code, and was prepped to deploy to production. But—thankfully—the team had added a manual approval step for Black Friday deployments. This was not just any deployment; it was potentially make-or-break for the company.
 
 Here's what went down:
+
 1. Jenkins ran the build and passed all automated tests.
 2. The pipeline paused for a manual review before hitting production.
 3. A senior engineer stepped in, looked over the logs, and realized that while everything looked good on paper, a critical configuration file had been incorrectly updated (oh, the horror!).
@@ -263,6 +267,7 @@ Without that manual step, the faulty configuration would've gone straight to pro
 Okay, time for a cautionary tale. Picture this: a fast-moving SaaS startup with a brilliant but small team of developers. They were pushing updates multiple times a day, and everything was going great—until they decided to introduce manual approval for deployments. The idea was good: ensure no code hits production without a final sanity check by the lead developer.
 
 But here's where it went sideways:
+
 1. Jenkins ran the builds and tests.
 2. After passing all tests, the pipeline halted for manual approval on every single deployment.
 3. The lead developer was often busy or, you know, doing lead developer things.
@@ -280,6 +285,7 @@ Your pipeline is like any other piece of software—it's not perfect the first t
 ### Use Metrics to Fine-Tune
 
 Metrics are your best friend when optimizing HITL pipelines. You should be collecting data on how long manual intervention steps take and how often they catch something that automated checks missed. Key metrics to track include:
+
 - **Mean Time to Approve (MTTA):** How long does it take for human intervention to occur? If it's taking too long, that's a problem.
 - **Frequency of Interventions:** How often are manual approvals triggered? If this number is high, you may need to reassess the placement of manual steps.
 - **Effectiveness of Interventions:** How often do these interventions catch real issues? If 90% of the time the human just clicks "approve" without making any changes, it's probably not adding value.

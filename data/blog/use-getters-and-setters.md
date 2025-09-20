@@ -31,7 +31,7 @@ While getters and setters are incredibly useful, they're not a silver bullet for
 
 ### Why You'll Love Getters and Setters
 
-The biggest win is **encapsulation**. By hiding the internal details of your class, you create a clean, predictable "public interface" for other developers to use. This also gives you incredible **future flexibility**. Let's say you're storing a person's `name` as a single string, but later you decide to store it as `_firstName` and `_lastName`. If other code was accessing the `name` property directly, that change would break everything. But if you were using a `getName()` getter, you can just update the *inside* of that getter to return `${this._firstName} ${this._lastName}`, and none of the code that *uses* your class will ever know the difference!
+The biggest win is **encapsulation**. By hiding the internal details of your class, you create a clean, predictable "public interface" for other developers to use. This also gives you incredible **future flexibility**. Let's say you're storing a person's `name` as a single string, but later you decide to store it as `_firstName` and `_lastName`. If other code was accessing the `name` property directly, that change would break everything. But if you were using a `getName()` getter, you can just update the _inside_ of that getter to return `${this._firstName} ${this._lastName}`, and none of the code that _uses_ your class will ever know the difference!
 
 As we mentioned, **validation** is another huge benefit. Setters are your first line of defense against bad data, helping to prevent bugs before they even happen.
 
@@ -51,21 +51,21 @@ Without getters and setters, anyone can change the `name` property to anything, 
 
 ```typescript
 class Person {
-  name: string;
+  name: string
 
   constructor(name: string) {
-    this.name = name;
+    this.name = name
   }
 
   greet() {
-    console.log(`Hello, my name is ${this.name}!`);
+    console.log(`Hello, my name is ${this.name}!`)
   }
 }
 
-const person = new Person('Alice');
-console.log(person.name); // Directly accessing the property
-person.name = ''; // Uh oh, we can set it to an invalid value!
-person.greet();
+const person = new Person('Alice')
+console.log(person.name) // Directly accessing the property
+person.name = '' // Uh oh, we can set it to an invalid value!
+person.greet()
 ```
 
 ### The "Bodyguard" Approach
@@ -74,37 +74,38 @@ With getters and setters, we can protect our `_name` property. We'll make it pri
 
 ```typescript
 class Person {
-  private _name: string;
+  private _name: string
 
   constructor(name: string) {
-    this._name = name;
+    this._name = name
   }
 
   get name(): string {
-    return this._name;
+    return this._name
   }
 
   set name(newName: string) {
     // Our "setter" bodyguard checks the new value first!
     if (newName.length === 0) {
-      throw new Error("The name cannot be empty");
+      throw new Error('The name cannot be empty')
     }
-    this._name = newName;
+    this._name = newName
   }
 
   greet() {
-    console.log(`Hello, my name is ${this.name}!`);
+    console.log(`Hello, my name is ${this.name}!`)
   }
 }
 
-const person = new Person('Alice');
-console.log(person.name); // Uses the getter
-person.name = 'Bob'; // Uses the setter
+const person = new Person('Alice')
+console.log(person.name) // Uses the getter
+person.name = 'Bob' // Uses the setter
 
 try {
-  person.name = ''; // The setter will now throw an error!
+  person.name = '' // The setter will now throw an error!
 } catch (e) {
-  console.error(e.message);
+  console.error(e.message)
 }
 ```
+
 Now our `Person` object is much safer and more predictable.

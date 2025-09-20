@@ -1,7 +1,7 @@
 ---
 tags: ['React', 'Next.js', 'Performance', 'SSR']
 draft: false
-title: "SSR vs. CSR: Understanding the Page Load Waterfall"
+title: 'SSR vs. CSR: Understanding the Page Load Waterfall'
 summary: "Why do some websites feel instant while others make you wait? It often comes down to Server-Side Rendering (SSR) vs. Client-Side Rendering (CSR). Let's dive into the 'waterfall' to see how they work."
 date: 2024-12-01
 images: []
@@ -28,19 +28,21 @@ It's called a waterfall because each step often has to wait for the previous one
 Client-Side Rendering is the approach used by many modern JavaScript frameworks out-of-the-box. With CSR, the server sends your browser a nearly empty HTML file. It's basically just a shell with a link to a big JavaScript file.
 
 This is where the long waterfall begins. The browser has to go through a multi-step process:
+
 1.  **Fetch the empty HTML:** A super-fast first step, but the user just sees a blank white screen.
 2.  **Fetch the JavaScript:** The browser then has to download all the JavaScript code needed to build the page.
 3.  **Run the JavaScript:** The browser executes the code, which builds the structure of the page.
-4.  **Fetch the Data:** Now that the JavaScript knows what content it needs (like a blog post or user profile), it has to make *another* network request back to the server to get that data.
+4.  **Fetch the Data:** Now that the JavaScript knows what content it needs (like a blog post or user profile), it has to make _another_ network request back to the server to get that data.
 5.  **Render the Final Page:** Once the data arrives, the JavaScript can finally render the complete page for the user to see.
 
-This long chain of requests is the classic CSR waterfall. While it can lead to very interactive, app-like experiences *after* the initial load, that first visit can feel painfully slow.
+This long chain of requests is the classic CSR waterfall. While it can lead to very interactive, app-like experiences _after_ the initial load, that first visit can feel painfully slow.
 
 ## The Short Waterfall of Server-Side Rendering (SSR)
 
-Server-Side Rendering flips this process on its head. With SSR, the server does most of the heavy lifting *before* it sends anything to your browser. The server builds the full HTML of the page, including all the content, and sends it as a single, complete package.
+Server-Side Rendering flips this process on its head. With SSR, the server does most of the heavy lifting _before_ it sends anything to your browser. The server builds the full HTML of the page, including all the content, and sends it as a single, complete package.
 
 The waterfall for SSR is much shorter and faster:
+
 1.  **Fetch the Complete HTML:** The browser makes a single request and receives a fully-formed HTML document with all the text and content ready to be displayed. The user sees the page content almost instantly.
 2.  **Fetch the JavaScript (in the background):** While the user is already reading the page, the browser can download the JavaScript in the background. Once it's loaded, it "hydrates" the page, making it interactive.
 

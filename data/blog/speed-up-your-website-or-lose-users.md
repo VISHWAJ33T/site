@@ -1,7 +1,7 @@
 ---
 tags: ['Performance', 'Web Vitals', 'User Experience']
 draft: false
-title: "Speed Up Your Website, Or Lose Your Visitors"
+title: 'Speed Up Your Website, Or Lose Your Visitors'
 summary: "In the digital world, speed is everything. A slow website can be a death sentence for user engagement. Let's look at the hard numbers and learn some simple tricks to make your site faster."
 date: 2024-10-06
 images: []
@@ -39,4 +39,4 @@ Another easy win is to minimize the amount of code and other assets your site ha
 
 At the end of the day, the lesson is simple: a fast website means happier users. Happier users are more likely to stay, to buy your products, to read your articles, and to come back in the future. The data tells us that smaller, leaner, and faster pages create a better user experience. So, if you want your website to succeed, the first and most important step is to make it fast.
 
-*Reference: [Think with Google](https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/)*
+_Reference: [Think with Google](https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/)_

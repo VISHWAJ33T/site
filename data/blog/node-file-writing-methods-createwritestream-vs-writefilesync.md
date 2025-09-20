@@ -1,5 +1,5 @@
 ---
-title: "Node.js File Writing: createWriteStream vs. writeFileSync"
+title: 'Node.js File Writing: createWriteStream vs. writeFileSync'
 date: 2024-11-03
 tags: ['Node.js', 'Performance', 'File System']
 draft: false
@@ -23,30 +23,30 @@ This approach is **asynchronous** and **non-blocking**. This means that when you
 Because it writes data in chunks, it's also very **memory-efficient**. You don't have to load a giant 1GB file into your computer's RAM just to write it to disk. You can read a small chunk, write it, and then move on to the next one.
 
 ```javascript
-const fs = require('fs');
+const fs = require('fs')
 
-const content = 'This is a large amount of text that we are streaming to a file!';
+const content = 'This is a large amount of text that we are streaming to a file!'
 
 // Open a "pipe" to the file
-const writeStream = fs.createWriteStream('example.txt');
+const writeStream = fs.createWriteStream('example.txt')
 
 // Send our content down the pipe
-writeStream.write(content, 'utf8');
+writeStream.write(content, 'utf8')
 
 // Close the pipe
-writeStream.end();
+writeStream.end()
 
 // Listen for a confirmation that it's all done
 writeStream.on('finish', () => {
-  console.log('File writing completed.');
-});
+  console.log('File writing completed.')
+})
 
 // Handle any potential errors
 writeStream.on('error', (err) => {
-  console.error('An error occurred:', err.message);
-});
+  console.error('An error occurred:', err.message)
+})
 
-console.log('This message will appear immediately, while the file is still being written!');
+console.log('This message will appear immediately, while the file is still being written!')
 ```
 
 ## The Simple Way: `writeFileSync`
@@ -55,24 +55,24 @@ On the other end of the spectrum is `writeFileSync`. The "Sync" at the end of it
 
 When you call `writeFileSync`, your entire program will **stop and wait** until the file has been completely written to the disk. Nothing else can happen while it's working. This might sound bad, but for certain tasks, it's actually perfect.
 
-This method is best when you're dealing with **small files** and the write operation is very quick. A great example is writing a configuration file when your application starts up. In that scenario, you *want* the application to wait until the config file is saved before it continues. It makes the logic simpler and more predictable.
+This method is best when you're dealing with **small files** and the write operation is very quick. A great example is writing a configuration file when your application starts up. In that scenario, you _want_ the application to wait until the config file is saved before it continues. It makes the logic simpler and more predictable.
 
 However, `writeFileSync` loads the entire content of what you're writing into memory first. This is fine for a small text file, but trying to do this with a large video file would be a very bad idea and could easily crash your application.
 
 ```javascript
-const fs = require('fs');
+const fs = require('fs')
 
-const content = 'This is a small config value.';
+const content = 'This is a small config value.'
 
 try {
   // The program will pause here until the file is written
-  fs.writeFileSync('config.txt', content, 'utf8');
-  console.log('File writing completed.');
+  fs.writeFileSync('config.txt', content, 'utf8')
+  console.log('File writing completed.')
 } catch (err) {
-  console.error('An error occurred:', err.message);
+  console.error('An error occurred:', err.message)
 }
 
-console.log('This message will only appear after the file has been saved.');
+console.log('This message will only appear after the file has been saved.')
 ```
 
 ## Which One Should You Use?
@@ -80,12 +80,14 @@ console.log('This message will only appear after the file has been saved.');
 Choosing between the two comes down to understanding your specific needs.
 
 You should choose **`createWriteStream`** when:
+
 - You're working with large files (like log files, user uploads, or data exports).
 - Your application needs to remain responsive and handle other tasks while writing.
 - Memory usage is a concern.
 - You're dealing with a continuous stream of data, like from a network request.
 
 You should choose **`writeFileSync`** when:
+
 - You're writing small files (like configuration or simple text files).
 - The operation needs to be complete before the rest of your program continues.
 - Simplicity and straightforward error handling are your top priorities.

@@ -1,5 +1,5 @@
 ---
-title: "SOLID Principles, Part 1: The Single Responsibility Principle"
+title: 'SOLID Principles, Part 1: The Single Responsibility Principle'
 draft: false
 tags: ['SOLID', 'OOP', 'Architecture']
 date: 2024-07-07
@@ -89,14 +89,15 @@ class EmailService {
   }
 }
 ```
+
 Now, if we need to change our email provider, we only have to touch the `EmailService`. The `UserDatabase` class remains safe and untouched. This is the power of the Single Responsibility Principle.
 
 ## The SOLID Series
 
 This is the first of five posts on the SOLID principles. Stay tuned for the rest!
 
--   **S: Single Responsibility Principle** (You are here!)
--   [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
--   [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
--   [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
--   [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)
+- **S: Single Responsibility Principle** (You are here!)
+- [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
+- [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
+- [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
+- [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)

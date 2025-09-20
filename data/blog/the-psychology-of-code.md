@@ -1,7 +1,7 @@
 ---
 tags: ['Teamwork', 'Code Culture', 'Best Practices']
 draft: false
-title: "The Psychology of Code: Why We Write Code the Way We Do"
+title: 'The Psychology of Code: Why We Write Code the Way We Do'
 summary: "Ever wonder why some codebases feel clean and inspiring, while others are a mess? It's not just about logic—it's about psychology. Let's explore how our minds shape the code we write."
 date: 2024-01-21
 images: []
@@ -11,7 +11,7 @@ publish: true
 
 ## It's Not Just About the Code, It's About the Coder
 
-We often think of coding as a purely logical, technical skill. You learn the syntax, you learn the algorithms, and you build things. But that's only half the story. Coding is a deeply *human* activity, and the way we think and feel has a huge impact on the quality of the code we produce. Understanding a little bit about the psychology behind programming can make you a better developer and a better teammate.
+We often think of coding as a purely logical, technical skill. You learn the syntax, you learn the algorithms, and you build things. But that's only half the story. Coding is a deeply _human_ activity, and the way we think and feel has a huge impact on the quality of the code we produce. Understanding a little bit about the psychology behind programming can make you a better developer and a better teammate.
 
 ## The "Broken Windows" Theory in Software
 
@@ -29,7 +29,7 @@ Great ways to do this include giving developers dedicated time to work on their 
 
 One of the fastest ways to create a toxic coding environment is to play the blame game. When a bug appears or something goes wrong, pointing fingers is not only counterproductive, it actively discourages people from taking risks and being honest about mistakes.
 
-Instead, the best teams practice a "blame-free" culture. When something breaks, the focus is not on *who* caused the problem, but on *what* caused it and how the *process* can be improved to prevent it from happening again. This approach, often seen in "blameless post-mortems" after an incident, builds trust and encourages developers to be proactive. When people aren't afraid of being shamed for a mistake, they are more likely to report issues early and work together to solve them.
+Instead, the best teams practice a "blame-free" culture. When something breaks, the focus is not on _who_ caused the problem, but on _what_ caused it and how the _process_ can be improved to prevent it from happening again. This approach, often seen in "blameless post-mortems" after an incident, builds trust and encourages developers to be proactive. When people aren't afraid of being shamed for a mistake, they are more likely to report issues early and work together to solve them.
 
 ## The Big Picture: Happy Coders, Better Code
 

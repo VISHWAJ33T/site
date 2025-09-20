@@ -1,7 +1,7 @@
 ---
 tags: ['Best Practices', 'Code Quality', 'Architecture']
 draft: false
-title: "DRY, WET, or AHA? Choosing the Right Coding Philosophy"
+title: 'DRY, WET, or AHA? Choosing the Right Coding Philosophy'
 summary: "DRY, WET, and AHA are three competing ideas about the 'right' way to write code. But which one is best? Let's break them down and learn how to find the perfect balance."
 date: 2024-03-10
 images: []
@@ -23,18 +23,19 @@ By following DRY, you create reusable pieces of code, like functions or classes.
 
 ```tsx
 // A reusable Greeting component is very DRY.
-import React from 'react';
+import React from 'react'
 
 interface Props {
-  name: string;
+  name: string
 }
 
 const Greeting: React.FC<Props> = ({ name }) => {
-  return <h1>Hello, {name}!</h1>;
-};
+  return <h1>Hello, {name}!</h1>
+}
 
-export default Greeting;
+export default Greeting
 ```
+
 In this example, the `Greeting` component can be used anywhere you need to say hello, ensuring every greeting on your site looks and acts the same.
 
 ## The Rebel Yell: Write Everything Twice (WET)
@@ -52,17 +53,19 @@ This brings us to the AHA principle, which is all about finding the perfect bala
 Instead of immediately abstracting the first time you see similar code, you wait. You let the duplication exist for a little while until you have a much deeper understanding of the true pattern. This prevents you from creating "hasty" abstractions that don't really fit the problem and end up making your code more complex.
 
 You might start with a simple, slightly WET component:
+
 ```tsx
-import React from 'react';
+import React from 'react'
 
 const Greeting: React.FC = () => {
-  const name = 'John Doe';
-  return <h1>Hello, {name}!</h1>;
-};
+  const name = 'John Doe'
+  return <h1>Hello, {name}!</h1>
+}
 
-export default Greeting;
+export default Greeting
 ```
-As your project grows, you might realize you need this greeting in many places, with different names. That's your "Aha!" moment. Now you can refactor it into the reusable, DRY component we saw earlier, confident that you're creating the *right* abstraction.
+
+As your project grows, you might realize you need this greeting in many places, with different names. That's your "Aha!" moment. Now you can refactor it into the reusable, DRY component we saw earlier, confident that you're creating the _right_ abstraction.
 
 ## Finding Your Balance
 

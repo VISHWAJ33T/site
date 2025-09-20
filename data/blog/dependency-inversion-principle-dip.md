@@ -1,5 +1,5 @@
 ---
-title: "SOLID Principles, Part 5: The Dependency Inversion Principle"
+title: 'SOLID Principles, Part 5: The Dependency Inversion Principle'
 draft: false
 tags: ['SOLID', 'OOP', 'Architecture']
 date: 2024-09-01
@@ -11,13 +11,14 @@ publish: true
 
 ## Don't Call Us, We'll Call You
 
-We've arrived at the final letter of the SOLID acronym: "D," which stands for the **Dependency Inversion Principle (DIP)**. This one can sound a bit intimidating, but it's based on a powerful, real-world idea that you might know as the "Hollywood Principle": *Don't call us, we'll call you.*
+We've arrived at the final letter of the SOLID acronym: "D," which stands for the **Dependency Inversion Principle (DIP)**. This one can sound a bit intimidating, but it's based on a powerful, real-world idea that you might know as the "Hollywood Principle": _Don't call us, we'll call you._
 
 The Dependency Inversion Principle has two parts:
+
 1.  High-level modules should not depend on low-level modules. Both should depend on abstractions (like interfaces).
 2.  Abstractions should not depend on details. Details should depend on abstractions.
 
-In simple terms, this means that a high-level class (like a `UserService` that handles business logic) shouldn't be tightly coupled to the specific, low-level tools it uses (like a `PostgreSQLDatabase` class). Instead, the high-level class should only know about an *abstraction*, like a generic `Database` interface. The specific database class can then be "plugged in" from the outside.
+In simple terms, this means that a high-level class (like a `UserService` that handles business logic) shouldn't be tightly coupled to the specific, low-level tools it uses (like a `PostgreSQLDatabase` class). Instead, the high-level class should only know about an _abstraction_, like a generic `Database` interface. The specific database class can then be "plugged in" from the outside.
 
 This "inverts" the typical flow of control. Instead of the `UserService` creating and controlling its own database connection, the control is inverted, and the database connection is given to the `UserService`.
 
@@ -51,7 +52,7 @@ Imagine a `UserService` that needs to fetch user data from a database.
 
 ### The Tightly Coupled Way
 
-In this version, the `UserService` *knows* it's using a `DatabaseService`. It creates its own instance of it. This is a problem. What if we want to test `UserService` without a real database? We can't. What if we want to switch to a different kind of database? We have to change the `UserService` code.
+In this version, the `UserService` _knows_ it's using a `DatabaseService`. It creates its own instance of it. This is a problem. What if we want to test `UserService` without a real database? We can't. What if we want to switch to a different kind of database? We have to change the `UserService` code.
 
 ```typescript
 // The high-level UserService depends directly on the low-level DatabaseService.
@@ -62,15 +63,15 @@ class DatabaseService {
 }
 
 class UserService {
-  private database: DatabaseService;
+  private database: DatabaseService
 
   constructor() {
     // The UserService is creating its own dependency. This is a tight coupling.
-    this.database = new DatabaseService();
+    this.database = new DatabaseService()
   }
 
   getUser(id: string): User {
-    return this.database.getUser(id);
+    return this.database.getUser(id)
   }
 }
 ```
@@ -82,7 +83,7 @@ Here, we "invert the control." The `UserService` no longer knows or cares what k
 ```typescript
 // First, we define the abstraction.
 interface Database {
-  getUser(id: string): User;
+  getUser(id: string): User
 }
 
 // Then, we create a concrete implementation.
@@ -94,30 +95,31 @@ class DatabaseService implements Database {
 
 // The UserService now depends only on the abstraction.
 class UserService {
-  private database: Database;
+  private database: Database
 
   // The dependency is "injected" from the outside.
   constructor(database: Database) {
-    this.database = database;
+    this.database = database
   }
 
   getUser(id: string): User {
-    return this.database.getUser(id);
+    return this.database.getUser(id)
   }
 }
 
 // Now we can create and "inject" any database we want!
-const databaseService = new DatabaseService();
-const userService = new UserService(databaseService);
+const databaseService = new DatabaseService()
+const userService = new UserService(databaseService)
 ```
+
 This version is flexible, testable, and a perfect example of the Dependency Inversion Principle in action.
 
 ## The SOLID Series
 
 And with that, our journey through the five SOLID principles is complete!
 
--   [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
--   [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
--   [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
--   [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
--   **D: Dependency Inversion Principle** (You are here!)
+- [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
+- [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
+- [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
+- [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
+- **D: Dependency Inversion Principle** (You are here!)

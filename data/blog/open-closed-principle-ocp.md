@@ -1,5 +1,5 @@
 ---
-title: "SOLID Principles, Part 2: The Open-Closed Principle"
+title: 'SOLID Principles, Part 2: The Open-Closed Principle'
 draft: false
 tags: ['SOLID', 'OOP', 'Architecture']
 date: 2024-07-21
@@ -15,7 +15,7 @@ Imagine you've built a beautiful, stable piece of software. It works perfectly. 
 
 This is the problem that the **Open-Closed Principle (OCP)** is designed to solve. It's the "O" in the SOLID acronym, and it states that: **software entities (like classes or modules) should be open for extension, but closed for modification.**
 
-In simple terms, this means you should be able to add new functionality to a class *without* changing its source code. It sounds like a magic trick, but it's a powerful design principle that leads to incredibly stable and maintainable software.
+In simple terms, this means you should be able to add new functionality to a class _without_ changing its source code. It sounds like a magic trick, but it's a powerful design principle that leads to incredibly stable and maintainable software.
 
 ## How to Be "Open for Extension"
 
@@ -47,7 +47,7 @@ Imagine we have an `Order` class that needs to handle different kinds of calcula
 
 ### Before OCP: The Rigid Class
 
-In this version, all the logic is inside the `Order` class. What happens when we need to add a new type of discount for VIP users? We have to go back and *change* the `applyDiscount` method. What if we want to generate a PDF invoice instead of a regular one? We have to change the `generateInvoice` method. This class is "closed" for extension.
+In this version, all the logic is inside the `Order` class. What happens when we need to add a new type of discount for VIP users? We have to go back and _change_ the `applyDiscount` method. What if we want to generate a PDF invoice instead of a regular one? We have to change the `generateInvoice` method. This class is "closed" for extension.
 
 ```typescript
 // Any new feature requires changing this class.
@@ -72,7 +72,7 @@ A much better approach is to create an `Order` interface and have different clas
 ```typescript
 // The core logic only knows about the `Order` interface.
 interface Order {
-  calculateTotal(): number;
+  calculateTotal(): number
 }
 
 // We can create as many new types of Orders as we want...
@@ -95,14 +95,15 @@ class OrderInvoice {
   }
 }
 ```
+
 Now, if we need to add a "VIPOrder" with a special discount, we can simply create a `VIPOrder` class that implements the `Order` interface. We never have to touch the `RegularOrder` or `DiscountedOrder` classes. The `OrderInvoice` class doesn't need to change either, because it can accept any object that conforms to the `Order` interface. Our system is now "open" for extension!
 
 ## The SOLID Series
 
 This is the second of five posts on the SOLID principles.
 
--   [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
--   **O: Open-Closed Principle** (You are here!)
--   [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
--   [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
--   [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)
+- [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
+- **O: Open-Closed Principle** (You are here!)
+- [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
+- [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
+- [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)

@@ -4,7 +4,7 @@ category: General
 publish: true
 slug: you-aint-gonna-need-it-yagni
 title: "You Ain't Gonna Need It: The Coder's Rule for Simplicity"
-summary: "Stop writing code for a future that might never happen. Learn the YAGNI principle and focus on what matters now to build cleaner, more efficient software."
+summary: 'Stop writing code for a future that might never happen. Learn the YAGNI principle and focus on what matters now to build cleaner, more efficient software.'
 draft: false
 tags: ['Best Practices', 'YAGNI', 'Simplicity']
 date: 2023-12-03
@@ -12,7 +12,7 @@ date: 2023-12-03
 
 ## What Does "You Ain't Gonna Need It" Really Mean?
 
-As programmers, we love to solve problems. Sometimes, we love it so much that we start solving problems that don't even exist yet. That's where the **YAGNI (You Ain't Gonna Need It)** principle comes in. It’s a simple but powerful reminder to **only write code that you need right now, not what you *think* you might need in the future.**
+As programmers, we love to solve problems. Sometimes, we love it so much that we start solving problems that don't even exist yet. That's where the **YAGNI (You Ain't Gonna Need It)** principle comes in. It’s a simple but powerful reminder to **only write code that you need right now, not what you _think_ you might need in the future.**
 
 It’s easy to fall into the trap of adding extra features or options just in case they're useful someday. YAGNI encourages us to resist that urge. By focusing only on the essential features for the current version of our project, we keep our code simple, clean, and efficient. It's about avoiding the clutter of "what-if" code and sticking to the "what-is" of the project.
 
@@ -36,7 +36,7 @@ This streamlined approach also makes your software much easier to maintain. With
 
 However, if you follow YAGNI too strictly, it can have its downsides. By focusing exclusively on the present, you might miss opportunities to build a feature that, while not immediately essential, could have provided a lot of value. It's a fine line to walk.
 
-Furthermore, ignoring the future completely can sometimes lead you to write code that is very difficult to expand upon later. When a new, legitimate requirement comes along, you might find that your super-simple code is too rigid to adapt without a major rewrite. The key is to write code that is simple *now*, but not so simple that it's impossible to change *later*.
+Furthermore, ignoring the future completely can sometimes lead you to write code that is very difficult to expand upon later. When a new, legitimate requirement comes along, you might find that your super-simple code is too rigid to adapt without a major rewrite. The key is to write code that is simple _now_, but not so simple that it's impossible to change _later_.
 
 ## Let's See It in Action: The Over-Engineered Button
 
@@ -50,12 +50,12 @@ It's easy to get carried away and try to build the "ultimate button" that can ha
 // Unnecessary features and excessive customization options
 class Button {
   constructor(text, color, size, icon, borderStyle, shadowEffect) {
-    this.text = text;
-    this.color = color;
-    this.size = size;
-    this.icon = icon;
-    this.borderStyle = borderStyle;
-    this.shadowEffect = shadowEffect;
+    this.text = text
+    this.color = color
+    this.size = size
+    this.icon = icon
+    this.borderStyle = borderStyle
+    this.shadowEffect = shadowEffect
     // ...and so on...
   }
 
@@ -67,6 +67,7 @@ class Button {
   // More methods for things you might not even need...
 }
 ```
+
 All you needed was a button that says "Submit," but now you have this complex beast that's hard to use and maintain.
 
 ### The Simple Way (Embracing YAGNI)
@@ -77,7 +78,7 @@ With YAGNI, you ask yourself, "What do I actually need?" The answer: a button wi
 // Simple and functional button component that does what's needed now
 class Button {
   constructor(text) {
-    this.text = text;
+    this.text = text
   }
 
   render() {
@@ -86,6 +87,7 @@ class Button {
   }
 }
 ```
+
 This code is clean, simple, and does exactly what it needs to do. If you need to add an icon later, you can modify it then. You haven't wasted time building features you don't need.
 
 ## How YAGNI Plays with Other Ideas

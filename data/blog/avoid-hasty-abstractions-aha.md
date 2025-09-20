@@ -3,7 +3,7 @@ alias: AHA Principle, Avoiding Hasty Abstractions, Moist Programming
 category: General
 publish: true
 slug: avoid-hasty-abstractions-aha
-title: "AHA! The Moment to Abstract Your Code (and When to Wait)"
+title: 'AHA! The Moment to Abstract Your Code (and When to Wait)'
 summary: "We love DRY code, but rushing to abstract can create a mess. The AHA principle is all about finding that 'Aha!' moment before you generalize. Let's learn to wait for the right abstraction."
 draft: false
 tags: ['Best Practices', 'Code Quality', 'AHA']
@@ -14,13 +14,13 @@ date: 2024-02-18
 
 As developers, we're trained to spot patterns. When we see similar-looking code, our first instinct is often to create an "abstraction"—a single, reusable piece of code (like a function or a class) that can handle all the similar cases. This is the heart of the [**DRY (Don't Repeat Yourself)**](/blog/dont-repeat-yourself-dry) principle. But what if our instinct is a little too fast?
 
-This is where the **AHA (Avoid Hasty Abstractions)** principle comes in. It's a simple, powerful idea: **prefer a little bit of duplication over creating the wrong abstraction.** The "Aha!" in the name represents that moment of clarity when you *truly* understand a pattern in your code, making it the perfect time to generalize. Before that moment, any attempt to abstract is just a guess—a hasty one that can lead to more problems than it solves.
+This is where the **AHA (Avoid Hasty Abstractions)** principle comes in. It's a simple, powerful idea: **prefer a little bit of duplication over creating the wrong abstraction.** The "Aha!" in the name represents that moment of clarity when you _truly_ understand a pattern in your code, making it the perfect time to generalize. Before that moment, any attempt to abstract is just a guess—a hasty one that can lead to more problems than it solves.
 
 ## The Art of Waiting for the Right Abstraction
 
 AHA programming is all about patience. It asks you to be comfortable with a little bit of duplicated code in the short term, giving you time to fully understand the problem you're solving. Instead of abstracting the first time you see a similar piece of code, you wait until you've seen it three or more times. This is often called the "Rule of Three."
 
-By waiting, you gather more information. You start to see the *true* pattern, not just the superficial similarities. You'll begin to notice which parts of the code are genuinely the same and which parts are slightly different but important. This deeper understanding allows you to design an abstraction that is both accurate and flexible. When you finally have that "Aha!" moment and the right abstraction becomes obvious, the code you write will be much cleaner and more maintainable than if you had rushed it.
+By waiting, you gather more information. You start to see the _true_ pattern, not just the superficial similarities. You'll begin to notice which parts of the code are genuinely the same and which parts are slightly different but important. This deeper understanding allows you to design an abstraction that is both accurate and flexible. When you finally have that "Aha!" moment and the right abstraction becomes obvious, the code you write will be much cleaner and more maintainable than if you had rushed it.
 
 ## The Good and Bad of Waiting
 
@@ -49,7 +49,7 @@ A common mistake is to create a generic "operation" function that takes a string
 // and uses a string to control logic, which is not very flexible.
 function performOperation(items: Item[], operation: string): void {
   for (const item of items) {
-    performCustomOperation(item, operation);
+    performCustomOperation(item, operation)
   }
 }
 
@@ -62,6 +62,7 @@ function performCustomOperation(item: Item, operation: string): void {
   // What if a new operation needs to work on the whole list at once? This design makes that hard.
 }
 ```
+
 This seems DRY, but it's a trap. It's not very flexible. What if a new operation needs to be more efficient and process the items in a batch? This design makes that difficult.
 
 ### The Patient (AHA) Approach
@@ -85,6 +86,7 @@ function performOperation(items: Item[], operation: string): void {
   // More operations...
 }
 ```
+
 This might seem WET, but it's a temporary step. After seeing a few of these, we might have an "Aha!" moment: "Aha! Each operation is really its own strategy. Let's pass in a function instead of a string!" This leads to a much better, more flexible abstraction than our first attempt.
 
 ## How AHA Plays with Other Principles

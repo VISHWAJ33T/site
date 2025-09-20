@@ -3,7 +3,7 @@ alias: WET Principle, Write Everything Twice, Duplication Over Premature Abstrac
 category: General
 publish: true
 slug: write-everything-twice-wet
-title: "The WET Principle: Why Repeating Yourself is Sometimes Okay"
+title: 'The WET Principle: Why Repeating Yourself is Sometimes Okay'
 summary: "We're always told 'Don't Repeat Yourself,' but what if a little duplication is actually a good thing? Let's explore the WET principle and when to embrace it."
 draft: false
 tags: ['Best Practices', 'Code Quality', 'WET']
@@ -18,7 +18,7 @@ The WET principle doesn't mean you should go around copying code everywhere. Ins
 
 ## How to Be Smart About Repeating Code
 
-The key to using the WET principle effectively is to find the right balance. You're not abandoning DRY; you're just being more thoughtful about when to apply it. The main idea is to **avoid premature abstraction**. Before you rush to create a reusable function for two pieces of code that look similar, take a moment. Are they *truly* the same, or do they just look alike for now? If they are likely to change in different ways in the future, a shared abstraction could become a tangled mess.
+The key to using the WET principle effectively is to find the right balance. You're not abandoning DRY; you're just being more thoughtful about when to apply it. The main idea is to **avoid premature abstraction**. Before you rush to create a reusable function for two pieces of code that look similar, take a moment. Are they _truly_ the same, or do they just look alike for now? If they are likely to change in different ways in the future, a shared abstraction could become a tangled mess.
 
 Sometimes, duplicated code is simply more readable. If the logic is simple and self-contained, having it right there where you need it can be much easier to understand than jumping to another file to figure out what a generic function is doing. The goal is to weigh the pros and cons and choose the path that leads to the most maintainable code in the long run.
 
@@ -49,21 +49,22 @@ In an attempt to be DRY, you might notice that both calculations use `3.14 * rad
 ```typescript
 // This is a "bad" example because the abstraction adds complexity without much benefit.
 function calculateArea(radius: number): number {
-  return calculatePiTimesRadius(radius) * radius;
+  return calculatePiTimesRadius(radius) * radius
 }
 
 function calculateCircumference(radius: number): number {
-  return 2 * calculatePiTimesRadius(radius);
+  return 2 * calculatePiTimesRadius(radius)
 }
 
 // This function is so simple that it's probably not worth creating.
 function calculatePiTimesRadius(radius: number): number {
-  return 3.14 * radius;
+  return 3.14 * radius
 }
 
-const area = calculateArea(5);
-const circumference = calculateCircumference(5);
+const area = calculateArea(5)
+const circumference = calculateCircumference(5)
 ```
+
 While technically DRY, this has made the code more complicated to read. You have to jump between three different functions to understand two simple formulas.
 
 ### The Clearer (WET) Way
@@ -73,16 +74,17 @@ In this case, a little duplication is actually much clearer and easier to unders
 ```typescript
 // Sometimes, a little duplication makes the code more straightforward.
 function calculateArea(radius: number): number {
-  return 3.14 * radius * radius;
+  return 3.14 * radius * radius
 }
 
 function calculateCircumference(radius: number): number {
-  return 2 * 3.14 * radius;
+  return 2 * 3.14 * radius
 }
 
-const area = calculateArea(5);
-const circumference = calculateCircumference(5);
+const area = calculateArea(5)
+const circumference = calculateCircumference(5)
 ```
+
 Here, the formulas are simple and self-contained. Anyone can read these functions and immediately understand what they do.
 
 ## How WET Fits with Other Ideas

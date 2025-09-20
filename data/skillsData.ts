@@ -14,6 +14,6 @@ const skillsData: string[] = [
   'Content Management Systems (CMS)',
   'Smart Contracts',
   'Decentralized Applications (DApps)',
-];
+]
 
-export default skillsData;
+export default skillsData

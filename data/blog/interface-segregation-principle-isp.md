@@ -1,5 +1,5 @@
 ---
-title: "SOLID Principles, Part 4: The Interface Segregation Principle"
+title: 'SOLID Principles, Part 4: The Interface Segregation Principle'
 draft: false
 tags: ['SOLID', 'OOP', 'Architecture']
 date: 2024-08-18
@@ -19,7 +19,7 @@ In simpler terms, it's better to have many small, specific interfaces than one b
 
 ## How to Create Lean, Focused Interfaces
 
-Applying ISP is all about understanding the specific needs of the classes that will be using your interfaces. Instead of thinking about all the possible things an object *could* do, you should focus on creating small, cohesive interfaces that are tailored to a single behavior.
+Applying ISP is all about understanding the specific needs of the classes that will be using your interfaces. Instead of thinking about all the possible things an object _could_ do, you should focus on creating small, cohesive interfaces that are tailored to a single behavior.
 
 This means you should actively **avoid "fat" interfaces**. If you find yourself creating an interface with a dozen methods, that's a huge red flag. It's very likely that no single class will ever need to implement all of those methods. The solution is to **segregate**, or split, that big interface into several smaller, more focused ones.
 
@@ -52,13 +52,14 @@ A common mistake is to create one giant interface that includes every possible a
 ```typescript
 // This interface is too "fat."
 interface IShape {
-  draw(): void;
-  resize(): void;
-  rotate(): void;
-  calculateArea(): void;
-  calculatePerimeter(): void;
+  draw(): void
+  resize(): void
+  rotate(): void
+  calculateArea(): void
+  calculatePerimeter(): void
 }
 ```
+
 Now, what happens if we have a `Circle` class? It can be drawn, resized, and can calculate its area and perimeter. But it can't be rotated in a meaningful way (a rotated circle looks the same). So, the `Circle` class would be forced to have a `rotate()` method that it doesn't actually need. This is a violation of ISP.
 
 ### The Lean, Segregated Solution
@@ -68,30 +69,31 @@ A much better approach is to break that fat interface down into smaller, more sp
 ```typescript
 // Each interface now has a single, clear purpose.
 interface IDrawable {
-  draw(): void;
+  draw(): void
 }
 
 interface IResizable {
-  resize(): void;
+  resize(): void
 }
 
 interface IRotatable {
-  rotate(): void;
+  rotate(): void
 }
 
 interface ICalculatable {
-  calculateArea(): void;
-  calculatePerimeter(): void;
+  calculateArea(): void
+  calculatePerimeter(): void
 }
 ```
+
 Now, our `Circle` class can simply implement `IDrawable`, `IResizable`, and `ICalculatable`. It doesn't have to worry about the `IRotatable` interface at all. This design is cleaner, more logical, and perfectly follows the Interface Segregation Principle.
 
 ## The SOLID Series
 
 We're almost at the end! Just one more principle to go.
 
--   [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
--   [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
--   [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
--   **I: Interface Segregation Principle** (You are here!)
--   [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)
+- [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
+- [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
+- [L: Liskov Substitution Principle](/blog/liskov-substitution-principle-lsp)
+- **I: Interface Segregation Principle** (You are here!)
+- [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)

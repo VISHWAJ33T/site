@@ -1,5 +1,5 @@
 ---
-title: "SOLID Principles, Part 3: The Liskov Substitution Principle"
+title: 'SOLID Principles, Part 3: The Liskov Substitution Principle'
 draft: false
 tags: ['SOLID', 'OOP', 'Architecture']
 date: 2024-08-04
@@ -23,7 +23,7 @@ Following LSP is all about making sure your inheritance hierarchies make sense a
 
 This means you must **respect the parent's method signatures**. If a method in the parent class takes a number and returns a string, the same method in the child class should do the same. You can't change the rules.
 
-More subtly, you have to honor the parent's behavior. The child class shouldn't be stricter than the parent. For example, if a `saveFile(file)` method in the parent can handle any type of file, a child class shouldn't override it to *only* accept image files. It should also fulfill the promises of the parent. If the parent's `saveFile` method guarantees it will always close the file handle, the child's version must do the same. Breaking these unwritten rules is the fastest way to violate LSP.
+More subtly, you have to honor the parent's behavior. The child class shouldn't be stricter than the parent. For example, if a `saveFile(file)` method in the parent can handle any type of file, a child class shouldn't override it to _only_ accept image files. It should also fulfill the promises of the parent. If the parent's `saveFile` method guarantees it will always close the file handle, the child's version must do the same. Breaking these unwritten rules is the fastest way to violate LSP.
 
 ## The Good and Bad of Substitutability
 
@@ -52,7 +52,7 @@ Let's say you have a `Bird` class with a `fly()` method.
 ```typescript
 class Bird {
   fly() {
-    console.log("I am flying!");
+    console.log('I am flying!')
   }
 }
 
@@ -60,6 +60,7 @@ class Duck extends Bird {} // A Duck is a Bird, and it can fly. Makes sense.
 
 class Ostrich extends Bird {} // An Ostrich is a Bird, but... it can't fly.
 ```
+
 Here's the problem: we've created an `Ostrich` class that inherits the `fly()` method, but an ostrich can't fly. If we have a function that takes any `Bird` and calls `fly()` on it, our program will lie when we pass in an ostrich. This violates LSP. The `Ostrich` is not a perfect substitute for a generic `Bird`.
 
 ### The Solution: A Better Family Tree
@@ -73,7 +74,7 @@ class Bird {}
 // We create a new, more specific class for birds that can fly.
 class FlyingBird extends Bird {
   fly() {
-    console.log("I am flying!");
+    console.log('I am flying!')
   }
 }
 
@@ -81,14 +82,15 @@ class Duck extends FlyingBird {} // A Duck is a FlyingBird. Perfect.
 
 class Ostrich extends Bird {} // An Ostrich is a Bird, but not a FlyingBird. Perfect.
 ```
+
 Now our classes are honest. A `Duck` can be used anywhere a `FlyingBird` is expected, and both a `Duck` and an `Ostrich` can be used where a generic `Bird` is expected. Our program is now logical, predictable, and follows the Liskov Substitution Principle.
 
 ## The SOLID Series
 
 This is the third of five posts on the SOLID principles.
 
--   [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
--   [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
--   **L: Liskov Substitution Principle** (You are here!)
--   [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
--   [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)
+- [S: Single Responsibility Principle](/blog/single-responsibility-principle-srp)
+- [O: Open-Closed Principle](/blog/open-closed-principle-ocp)
+- **L: Liskov Substitution Principle** (You are here!)
+- [I: Interface Segregation Principle](/blog/interface-segregation-principle-isp)
+- [D: Dependency Inversion Principle](/blog/dependency-inversion-principle-dip)

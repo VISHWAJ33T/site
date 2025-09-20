@@ -1,5 +1,5 @@
 ---
-title: "What Are Progressive Web Apps (PWAs)?"
+title: 'What Are Progressive Web Apps (PWAs)?'
 summary: "PWAs blend the best of web and mobile apps. Let's explore what they are, their core features, and the advanced capabilities that are changing the web."
 date: '2023-10-30'
 images: []
@@ -17,11 +17,12 @@ PWAs are a new generation of web applications that use modern browser technologi
 ![A diagram showing the core features of a PWA: Responsive, Offline Capable, App-Like, Installable, and Secure.](/static/images/blog/progressive-web-apps-and-their-advanced-features/features.png)
 
 At their core, PWAs are defined by a few key characteristics:
--   **Responsive:** They look great and work perfectly on any device, from a tiny smartphone to a giant desktop monitor.
--   **Offline Capable:** Thanks to a technology called Service Workers, PWAs can cache content locally, allowing them to work even when you don't have an internet connection.
--   **App-Like Feel:** They offer smooth scrolling, fast navigation, and a user interface that feels like a real app, not a clunky website.
--   **Installable:** Users can add a PWA directly to their home screen with a single tap, no app store required.
--   **Secure:** They are always served over HTTPS, ensuring a secure connection between the user and the server.
+
+- **Responsive:** They look great and work perfectly on any device, from a tiny smartphone to a giant desktop monitor.
+- **Offline Capable:** Thanks to a technology called Service Workers, PWAs can cache content locally, allowing them to work even when you don't have an internet connection.
+- **App-Like Feel:** They offer smooth scrolling, fast navigation, and a user interface that feels like a real app, not a clunky website.
+- **Installable:** Users can add a PWA directly to their home screen with a single tap, no app store required.
+- **Secure:** They are always served over HTTPS, ensuring a secure connection between the user and the server.
 
 ## Beyond the Basics: The Advanced Superpowers of PWAs
 

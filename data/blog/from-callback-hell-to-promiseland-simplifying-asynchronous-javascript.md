@@ -20,16 +20,17 @@ Just look at this classic example of what Callback Hell looks like:
 ```typescript
 // This is the Pyramid of Doom!
 asyncTask1((result1) => {
-  console.log('Finished task 1');
+  console.log('Finished task 1')
   asyncTask2(result1, (result2) => {
-    console.log('Finished task 2');
+    console.log('Finished task 2')
     asyncTask3(result2, (result3) => {
-      console.log('Finished task 3');
+      console.log('Finished task 3')
       // And it could keep going...
-    });
-  });
-});
+    })
+  })
+})
 ```
+
 Trying to follow the flow of that code is tough. If there's an error, figuring out which step failed is a real headache. Thankfully, modern JavaScript gives us a much cleaner way to handle this: **Promises**.
 
 ## Promises to the Rescue!
@@ -53,16 +54,16 @@ And if anything goes wrong at any step in the chain, we can handle all the error
 fetchData()
   .then((data) => {
     // This runs after fetchData is done
-    return processData(data);
+    return processData(data)
   })
   .then((processedData) => {
     // This runs after processData is done
-    return displayData(processedData);
+    return displayData(processedData)
   })
   .catch((error) => {
     // If anything fails in the chain, we end up here
-    console.error("Something went wrong:", error);
-  });
+    console.error('Something went wrong:', error)
+  })
 ```
 
 ## The Ultimate Upgrade: Async/Await
@@ -75,15 +76,16 @@ Here's how that same logic looks with `async/await`:
 // This code is so easy to read!
 async function getData() {
   try {
-    const data = await fetchData();
-    const processedData = await processData(data);
-    displayData(processedData);
+    const data = await fetchData()
+    const processedData = await processData(data)
+    displayData(processedData)
   } catch (error) {
     // Any error from the awaited promises will be caught here
-    console.error("Something went wrong:", error);
+    console.error('Something went wrong:', error)
   }
 }
 ```
+
 You just declare your function as `async`, and then you can use the `await` keyword to pause the function until a Promise is fulfilled. It's the same power of Promises, but with a syntax that's much easier on the eyes.
 
 ## Why Promises Win
@@ -95,6 +97,3 @@ Let's do a quick comparison to see why moving away from callbacks is such a big 
 **Promise-based code**, on the other hand, allows you to write clean, sequential-looking code, especially with `async/await`. It gives you a single, clean way to handle all your errors with `.catch()` or a `try...catch` block, making your code much more robust and predictable.
 
 By embracing Promises, you're not just cleaning up your code; you're making it more maintainable, easier to debug, and more enjoyable to work on. It's a fundamental part of modern web development that will save you and your team a lot of headaches.
-
-
-
