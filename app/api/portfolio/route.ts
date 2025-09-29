@@ -6,28 +6,13 @@ import projectsData from 'data/projectsData'
 import siteMetadata from 'data/siteMetadata'
 import skillsData from 'data/skillsData'
 
-import type {
-  Author,
-  Experience,
-  PortfolioData,
-  Project,
-  Site,
-} from '@/lib/portfolio-types'
+import type { Author, Experience, PortfolioData, Project, Site } from '@/lib/portfolio-types'
 
 export async function GET() {
   try {
     const authorDetails = allAuthors[0]
-    const {
-      name,
-      avatar,
-      occupation,
-      company,
-      email,
-      twitter,
-      linkedin,
-      github,
-      body,
-    } = authorDetails
+    const { name, avatar, occupation, company, email, twitter, linkedin, github, body } =
+      authorDetails
 
     const siteUrl = siteMetadata.siteUrl ?? ''
 
@@ -85,9 +70,6 @@ export async function GET() {
     })
   } catch (error) {
     console.error(error)
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
