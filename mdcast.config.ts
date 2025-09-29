@@ -11,9 +11,9 @@ const config: MdCastConfigInput = {
       date: 'date',
       slug: 'slug',
     },
-    canonical_url_base: 'https://vishwaj33t.vercel.app/blog',
-    link_url_base: 'https://vishwaj33t.vercel.app',
-    image_url_base: 'https://vishwaj33t.vercel.app',
+    canonical_url_base: 'https://vishwaj33t.com/blog',
+    link_url_base: 'https://vishwaj33t.com',
+    image_url_base: 'https://vishwaj33t.com',
     default_lang: 'typescript',
   },
   devto: {
