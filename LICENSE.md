@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2022 FranciscoMoretti
+Copyright (c) 2022 FranciscoMoretti  
+Copyright (c) 2025 Vishwajeet Yadav
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
