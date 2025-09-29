@@ -112,7 +112,7 @@ const projectsData: Project[] = [
   //   title: 'vishwaj33t',
   //   description: `My own digital home on the internet.`,
   //   imgSrc: '/static/images/projects/vishwaj33t.png',
-  //   href: 'https://vishwaj33t.vercel.app/',
+  //   href: 'https://vishwaj33t.com/',
   // },
 ] as const
 
