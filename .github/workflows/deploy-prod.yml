@@ -1,0 +1,100 @@
+name: Production Deployment
+
+on:
+  push:
+    branches: [main, feat/deploy-workflow]
+
+permissions:
+  contents: write # Needed for actions/checkout if you use commit-based features
+
+concurrency:
+  group: ${{ github.repository }}-prod
+  cancel-in-progress: true
+
+jobs:
+  prod-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24' # Match the version you installed on the server
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          # --- UPDATED PATH ---
+          path: .cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.PROD_NEXT_PUBLIC_API_URL }}
+
+      - name: Prepare deployment files
+        run: |
+          mkdir -p deploy_package
+          cp -r .next/standalone/. deploy_package/
+          cp -r .next/static deploy_package/.next/static
+          cp -r public deploy_package/public
+
+      - name: Create .env file
+        run: |
+          echo "Creating .env file for deployment..."
+          touch deploy_package/.env
+
+          # Add static variables
+          echo "PORT=8000" >> deploy_package/.env
+          echo "NODE_ENV=production" >> deploy_package/.env
+
+          # Add all secrets that start with PROD_
+          # and remove the "PROD_" prefix
+          echo "${{ toJSON(secrets) }}" | jq -r 'to_entries[] | select(.key | startswith("PROD_")) | "\(.key | ltrimstr("PROD_"))=\(.value)"' >> deploy_package/.env
+
+          echo ".env file created with all PROD_ secrets."
+          # Optional: Uncomment to see the .env file's content (without values)
+          # grep -o '^[^=]*' deploy_package/.env
+
+      - name: Upload using rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: '-avzr --delete' # Uploads the new .env file
+          path: 'deploy_package/'
+          remote_path: '/home/${{ secrets.DROPLET_USER }}/${{ secrets.PROJECT_NAME }}/builds/prod/main'
+          remote_host: ${{ secrets.DROPLET_IP }}
+          remote_user: ${{ secrets.DROPLET_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy on DigitalOcean
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Source NVM
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            # Use the Node.js version you installed
+            nvm use 24
+
+            # Navigate to the project's app directory
+            cd /home/${{ secrets.DROPLET_USER }}/${{ secrets.PROJECT_NAME }}/builds/prod/main
+
+            # PM2 will auto-load the new .env file from the directory
+            # --update-env tells it to reload the environment
+            pm2 start server.js --name "${{ secrets.PROJECT_NAME }}-main" --update-env || pm2 restart ${{ secrets.PROJECT_NAME }}-main --update-env
+
+            # Save the process list
+            pm2 save
+            echo "Deployment successful."
