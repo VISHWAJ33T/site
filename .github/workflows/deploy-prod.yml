@@ -24,7 +24,7 @@ jobs:
           node-version: '24'
           # cache: 'npm' # This automatically caches node_modules
 
-      # --- This step now caches the Next.js build cache ---
+      # --- This step caches the Next.js build cache ---
       - name: Cache Next.js build
         uses: actions/cache@v4
         with:
@@ -50,6 +50,8 @@ jobs:
           cp -r public deploy_package/public
 
       - name: Create .env file
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
         run: |
           echo "Creating .env file for deployment..."
           touch deploy_package/.env
@@ -58,9 +60,8 @@ jobs:
           echo "PORT=8000" >> deploy_package/.env
           echo "NODE_ENV=production" >> deploy_package/.env
 
-          # Add all secrets that start with PROD_
-          # and remove the "PROD_" prefix
-          echo "${{ toJSON(secrets) }}" | jq -r 'to_entries[] | select(.key | startswith("PROD_")) | "\(.key | ltrimstr("PROD_"))=\(.value)"' >> deploy_package/.env
+          # Read from the environment variable
+          echo "$SECRETS_JSON" | jq -r 'to_entries[] | select(.key | startswith("PROD_")) | "\(.key | ltrimstr("PROD_"))=\(.value)"' >> deploy_package/.env
 
           echo ".env file created with all PROD_ secrets."
           # Optional: Uncomment to see the .env file's content (without values)
