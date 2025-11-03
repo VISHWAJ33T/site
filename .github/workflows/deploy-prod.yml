@@ -39,7 +39,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_APP_URL: ${{ secrets.PROD_NEXT_PUBLIC_APP_URL }}
-          EXPORT: ${{ secrets.PROD_EXPORT }}
+          EXPORT: 'standalone'
 
       - name: Prepare deployment files
         run: |
