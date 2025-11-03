@@ -94,9 +94,13 @@ jobs:
             # Navigate to the project's app directory
             cd /home/${{ secrets.DROPLET_USER }}/${{ secrets.PROJECT_NAME }}/builds/prod/main
 
-            # PM2 will auto-load the new .env file from the directory
-            # --update-env tells it to reload the environment
-            pm2 start server.js --name "${{ secrets.PROJECT_NAME }}-main" --update-env || pm2 restart ${{ secrets.PROJECT_NAME }}-main --update-env
+            # Set all variables in .env to be exported
+            set -a
+            source .env
+            set +a
+
+            # --update-env will now see the exported variables
+            pm2 start server.js --name "${{ secrets.PROJECT_NAME }}-prod" --update-env || pm2 restart ${{ secrets.PROJECT_NAME }}-prod --update-env
 
             # Save the process list
             pm2 save
