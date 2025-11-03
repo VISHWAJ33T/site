@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm' # This automatically caches node_modules
+          # cache: 'npm' # This automatically caches node_modules
 
       # --- This step now caches the Next.js build cache ---
       - name: Cache Next.js build
