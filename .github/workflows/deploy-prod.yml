@@ -18,16 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 24
+      - name: Use Node.js 24 and cache npm
         uses: actions/setup-node@v4
         with:
-          node-version: '24' # Match the version you installed on the server
+          node-version: '24'
+          cache: 'npm' # This automatically caches node_modules
 
-      - name: Cache dependencies
+      # --- This step now caches the Next.js build cache ---
+      - name: Cache Next.js build
         uses: actions/cache@v4
         with:
-          # --- UPDATED PATH ---
-          path: .cache
+          path: .next/cache # path for Next.js build cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
