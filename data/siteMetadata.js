@@ -32,7 +32,7 @@ const siteMetadata = {
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'vishwajeety14122@gmail.com',
   github: 'https://github.com/vishwaj33t',
-  x: 'https://twitter.com/vlshwaj33t',
+  x: 'https://twitter.com/vlshwajeet',
   // twitter: 'https://twitter.com/Twitter',
   // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',
