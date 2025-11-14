@@ -30,6 +30,21 @@ const projectsData: Project[] = [
     ],
   },
   {
+    title: 'Ratnawn Ai',
+    description:
+      'A multi-agent platform for fashion e-commerce featuring a suite of specialized AI tools. Anchored by a "Smart Model" agent that generates high-fidelity on-model imagery and videos, the ecosystem extends to include utilities for image manipulation, upscaling, speech translation, and product catalog generation.',
+    imgSrc: '/static/images/projects/ratnawn-ai.png',
+    links: [{ text: 'Live', href: 'https://web.ratnawnai.com' }],
+    badges: ['Multi-Agent', 'Generative AI', 'E-commerce', 'Serverless'],
+    contribution: [
+      'Architected a responsive system using AWS Lambda and SQS for background processing, coupled with a self-hosted Next.js BFF that consumes webhooks and streams real-time updates to the client via SSE.',
+      'Developed the "Smart Model" agent capable of generating consistent 4K model imagery (front/back/side) and videos from garment photos with >95% design accuracy.',
+      'Implemented a RAG-based retrieval system to dynamically select tailored, internally maintained models and backgrounds (indoor/outdoor) based on product style.',
+      'Engineered an AI analysis pipeline that extracts product features to auto-generate SEO-rich Excel catalogs.',
+      'Integrated a diverse stack of generative tools (Nanobanana, Fal.ai, Flux Kontext, Seeddreams, Recraft Crisp, KlingAI, Replicate) to power specialized image manipulation tasks.',
+    ],
+  },
+  {
     title: 'Sense Ai',
     description:
       'An AI platform for personalized learning, featuring AI-generated quizzes and dynamic learning feeds. It uses a multi-model approach (Gemini, FireGenKit) for content creation, RAG for real-time data enrichment, and a secure chatbot for an interactive experience.',
@@ -48,6 +63,20 @@ const projectsData: Project[] = [
       'Engineered the real-time communication layer using Socket.IO to power seamless, interactive features within the application.',
       'Implemented a custom authentication system with secure access and refresh tokens for the Expo React Native app.',
       'Managed backend infrastructure on a VPS, establishing an automated deployment workflow with distinct development, staging, and production environments.',
+    ],
+  },
+  {
+    title: 'Enterprise HR Automation & Sync',
+    description:
+      'A mission-critical automation infrastructure designed to synchronize employee data across disparate management platforms (Acumatica, HCSS, Payworks) for an organization of over 500 employees, migrating legacy workflows from Zapier to n8n.',
+    imgSrc: '/static/images/projects/enterprise-automation.png',
+    links: [],
+    badges: ['n8n', 'Automation', 'Zapier Migration', 'Enterprise'],
+    contribution: [
+      'Migrated and optimized complex enterprise workflows from Zapier to n8n, significantly reducing operational costs while increasing flexibility.',
+      'Architected a robust synchronization engine using Webhooks and Cron jobs to ensure data consistency for 500+ employees across HR, payroll, and construction management systems.',
+      'Developed custom JavaScript nodes for secure payload parsing and implemented OAuth 2.0 authentication flows to handle sensitive employee data updates.',
+      'Designed a resilient error handling and logging architecture to guarantee reliability for critical HR operations.',
     ],
   },
   {
@@ -109,10 +138,10 @@ const projectsData: Project[] = [
     ],
   },
   // {
-  //   title: 'vishwaj33t',
-  //   description: `My own digital home on the internet.`,
-  //   imgSrc: '/static/images/projects/vishwaj33t.png',
-  //   href: 'https://vishwaj33t.com/',
+  //  title: 'vishwaj33t',
+  //  description: `My own digital home on the internet.`,
+  //  imgSrc: '/static/images/projects/vishwaj33t.png',
+  //  href: 'https://vishwaj33t.com/',
   // },
 ] as const
 
