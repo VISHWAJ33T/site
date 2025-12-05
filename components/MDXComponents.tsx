@@ -1,5 +1,5 @@
-import TOCInline from 'pliny/ui/TOCInline'
-import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
+import TOCInline from 'pliny/ui/TOCInline.js'
+import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm.js'
 import type { MDXComponents } from 'mdx/types'
 import CustomLink from './Link'
 import TableWrapper from './TableWrapper'
