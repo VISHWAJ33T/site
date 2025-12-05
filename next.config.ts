@@ -68,8 +68,13 @@ const config: NextConfig = {
   serverExternalPackages: [
     '@ffmpeg-installer/ffmpeg',
     '@ffprobe-installer/ffprobe',
+    'ffmpeg-static',
+    'ffprobe-static',
     'puppeteer',
     '@microfox/puppeteer-sls',
+    'puppeteer-core',
+    'puppeteer-extra',
+    'puppeteer-extra-plugin-stealth',
   ],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {

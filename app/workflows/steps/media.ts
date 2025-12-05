@@ -5,7 +5,9 @@ const setupFfmpeg = async () => {
 
   try {
     // Dynamic import with try-catch to handle missing binaries in serverless
+    // @ts-ignore
     const ffmpegInstaller = (await import('@ffmpeg-installer/ffmpeg')).default
+    // @ts-ignore
     const ffprobeInstaller = (await import('@ffprobe-installer/ffprobe')).default
 
     // Verify and set ffmpeg path
@@ -29,24 +31,73 @@ const setupFfmpeg = async () => {
 
     // Try alternative path resolution if primary failed
     if (!ffprobePathSet) {
-      const alternativePaths = [
-        // Try direct node_modules path
-        path.resolve(
-          process.cwd(),
+      // Construct paths relative to the project root (process.cwd())
+      // Vercel / Next.js output standalone often nests everything
+      const projectRoot = process.cwd()
+
+      const possiblePaths = [
+        // Standard node_modules layout
+        path.join(projectRoot, 'node_modules', '@ffprobe-installer', 'win32-x64', 'ffprobe.exe'),
+        path.join(projectRoot, 'node_modules', '@ffprobe-installer', 'linux-x64', 'ffprobe'),
+        path.join(projectRoot, 'node_modules', '@ffprobe-installer', 'darwin-x64', 'ffprobe'),
+        // Nested node_modules in standalone builds
+        path.join(
+          projectRoot,
+          'server',
           'node_modules',
           '@ffprobe-installer',
-          'win32-x64',
-          'ffprobe.exe'
+          'linux-x64',
+          'ffprobe'
         ),
-        path.resolve(process.cwd(), 'node_modules', '@ffprobe-installer', 'linux-x64', 'ffprobe'),
-      ].filter(Boolean) as string[]
+        // Fallback to searching by package name if possible (not reliable in bundled envs, but worth a try)
+      ]
 
-      for (const altPath of alternativePaths) {
+      // Also try resolving via require.resolve if not bundled away
+      try {
+        const ffprobePackagePath = require.resolve('@ffprobe-installer/ffprobe/package.json')
+        const packageDir = path.dirname(ffprobePackagePath)
+        // Assuming default structure based on platform
+        const platform = process.platform
+        const arch = process.arch
+        // Map simple platform/arch to known paths if needed or just search subdirs
+        // For now, let's just check the known subfolders in that package dir
+        possiblePaths.push(path.join(packageDir, 'win32-x64', 'ffprobe.exe'))
+        possiblePaths.push(path.join(packageDir, 'linux-x64', 'ffprobe'))
+      } catch (e) {
+        /* ignore */
+      }
+
+      for (const altPath of possiblePaths) {
         if (altPath && fs.existsSync(altPath)) {
+          console.log(`Found ffprobe at: ${altPath}`)
           ffmpeg.setFfprobePath(altPath)
           ffprobePathSet = true
           break
         }
+      }
+    }
+
+    if (!ffprobePathSet) {
+      console.warn(
+        'Could not find ffprobe binary in any expected location. Listing node_modules/@ffprobe-installer if possible:'
+      )
+      try {
+        const debugPath = path.join(process.cwd(), 'node_modules', '@ffprobe-installer')
+        if (fs.existsSync(debugPath)) {
+          const contents = fs.readdirSync(debugPath)
+          console.warn('Contents of @ffprobe-installer:', contents)
+          // If platform folders exist, check inside
+          contents.forEach((item) => {
+            const subPath = path.join(debugPath, item)
+            if (fs.statSync(subPath).isDirectory()) {
+              console.warn(`Contents of ${item}:`, fs.readdirSync(subPath))
+            }
+          })
+        } else {
+          console.warn('@ffprobe-installer directory not found in node_modules')
+        }
+      } catch (e) {
+        console.warn('Error debugging paths:', e)
       }
     }
   } catch (error) {
