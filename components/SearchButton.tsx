@@ -1,9 +1,9 @@
-import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
-import { KBarButton } from 'pliny/search/KBarButton'
+import { AlgoliaButton } from 'pliny/search/AlgoliaButton.js'
+import { KBarButton } from 'pliny/search/KBarButton.js'
 import siteMetadata from '@/data/siteMetadata'
 import { buttonVariants } from './ui/button'
 import { cn } from './lib/utils'
-import { SearchProvider } from 'pliny/search'
+import { SearchProvider } from 'pliny/search/index.js'
 
 const SearchButton = () => {
   if (

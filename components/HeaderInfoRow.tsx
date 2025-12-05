@@ -1,6 +1,6 @@
 'use client'
 
-import { formatDate } from 'pliny/utils/formatDate'
+import { formatDate } from 'pliny/utils/formatDate.js'
 import siteMetadata from '@/data/siteMetadata'
 import { PostViews } from '@/components/post-views/post-views'
 import CopyAsMarkdownButton from '@/components/CopyAsMarkdownButton'

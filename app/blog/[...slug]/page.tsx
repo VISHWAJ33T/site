@@ -1,8 +1,8 @@
 import 'katex/dist/katex.css'
 
 import { components } from '@/components/MDXComponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
+import { MDXLayoutRenderer } from 'pliny/mdx-components.js'
+import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer.js'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
