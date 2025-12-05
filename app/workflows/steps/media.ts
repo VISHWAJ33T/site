@@ -1,33 +1,60 @@
 const setupFfmpeg = async () => {
   const ffmpeg = (await import('fluent-ffmpeg')).default
-  const { path: ffprobePath } = await import('ffprobe-static')
-  const ffmpegStatic = (await import('ffmpeg-static')).default
   const fs = (await import('fs')).default
   const path = (await import('path')).default
 
-  // Resolve ffprobe
-  let resolvedFfprobePath = ffprobePath
-  if (!fs.existsSync(resolvedFfprobePath)) {
-    const localPath = path.join(
-      process.cwd(),
-      'node_modules',
-      'ffprobe-static',
-      'bin',
-      'win32',
-      'x64',
-      'ffprobe.exe'
-    )
-    if (fs.existsSync(localPath)) resolvedFfprobePath = localPath
-  }
-  ffmpeg.setFfprobePath(resolvedFfprobePath)
+  try {
+    // Dynamic import with try-catch to handle missing binaries in serverless
+    const ffmpegInstaller = (await import('@ffmpeg-installer/ffmpeg')).default
+    const ffprobeInstaller = (await import('@ffprobe-installer/ffprobe')).default
 
-  // Resolve ffmpeg
-  let resolvedFfmpegPath = ffmpegStatic
-  if (resolvedFfmpegPath && !fs.existsSync(resolvedFfmpegPath)) {
-    const localPath = path.join(process.cwd(), 'node_modules', 'ffmpeg-static', 'ffmpeg.exe')
-    if (fs.existsSync(localPath)) resolvedFfmpegPath = localPath
+    // Verify and set ffmpeg path
+    if (ffmpegInstaller?.path) {
+      const ffmpegPath = ffmpegInstaller.path
+      if (fs.existsSync(ffmpegPath)) {
+        ffmpeg.setFfmpegPath(ffmpegPath)
+      }
+    }
+
+    // Verify and set ffprobe path with multiple fallback strategies
+    let ffprobePathSet = false
+
+    if (ffprobeInstaller?.path) {
+      const ffprobePath = ffprobeInstaller.path
+      if (fs.existsSync(ffprobePath)) {
+        ffmpeg.setFfprobePath(ffprobePath)
+        ffprobePathSet = true
+      }
+    }
+
+    // Try alternative path resolution if primary failed
+    if (!ffprobePathSet) {
+      const alternativePaths = [
+        // Try direct node_modules path
+        path.resolve(
+          process.cwd(),
+          'node_modules',
+          '@ffprobe-installer',
+          'win32-x64',
+          'ffprobe.exe'
+        ),
+        path.resolve(process.cwd(), 'node_modules', '@ffprobe-installer', 'linux-x64', 'ffprobe'),
+      ].filter(Boolean) as string[]
+
+      for (const altPath of alternativePaths) {
+        if (altPath && fs.existsSync(altPath)) {
+          ffmpeg.setFfprobePath(altPath)
+          ffprobePathSet = true
+          break
+        }
+      }
+    }
+  } catch (error) {
+    console.warn(
+      'ffmpeg/ffprobe installers not available, using system binaries if available:',
+      error
+    )
   }
-  if (resolvedFfmpegPath) ffmpeg.setFfmpegPath(resolvedFfmpegPath)
 
   return { ffmpeg, fs, path }
 }
