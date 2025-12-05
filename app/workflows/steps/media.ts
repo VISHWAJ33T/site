@@ -112,76 +112,164 @@ const setupFfmpeg = async () => {
 
 export const probeVideo = async (filePath: string) => {
   'use step'
-  const { ffmpeg, path } = await setupFfmpeg()
+  const { ffmpeg, path, fs } = await setupFfmpeg()
 
-  // Resolve public URL path to absolute file system path
-  let absolutePath = filePath
-  if (filePath.startsWith('/')) {
-    absolutePath = path.join(process.cwd(), 'public', filePath)
+  let inputPath = filePath
+  let tempInputPath: string | null = null
+
+  // Handle Data URL input by writing to /tmp
+  if (filePath.startsWith('data:')) {
+    const matches = filePath.match(/^data:(.+?);base64,(.+)$/)
+    if (matches) {
+      const ext = matches[1].split('/')[1] || 'mp4'
+      const buffer = Buffer.from(matches[2], 'base64')
+      tempInputPath = path.join('/tmp', `input-${Date.now()}.${ext}`)
+      fs.writeFileSync(tempInputPath, buffer)
+      inputPath = tempInputPath
+    }
+  } else if (filePath.startsWith('/') && !filePath.startsWith('http')) {
+    // Handle legacy local path (if any remain) by resolving to public
+    // But we should deprecate this path preferably
+    inputPath = path.join(process.cwd(), 'public', filePath)
   }
 
-  return new Promise((resolve, reject) => {
-    ffmpeg.ffprobe(absolutePath, (err, metadata) => {
-      if (err) reject(err)
-      else resolve(metadata.format)
+  try {
+    return await new Promise((resolve, reject) => {
+      ffmpeg.ffprobe(inputPath, (err, metadata) => {
+        if (err) reject(err)
+        else resolve(metadata.format)
+      })
     })
-  })
+  } finally {
+    // Clean up temp file
+    if (tempInputPath && fs.existsSync(tempInputPath)) {
+      try {
+        fs.unlinkSync(tempInputPath)
+      } catch (e) {
+        console.error('Failed to delete temp file:', e)
+      }
+    }
+  }
 }
 
 export const generateThumbnail = async (filePath: string) => {
   'use step'
   const { ffmpeg, fs, path } = await setupFfmpeg()
 
-  // Resolve public URL path to absolute file system path
-  let absolutePath = filePath
-  if (filePath.startsWith('/')) {
-    absolutePath = path.join(process.cwd(), 'public', filePath)
+  let inputPath = filePath
+  let tempInputPath: string | null = null
+
+  if (filePath.startsWith('data:')) {
+    const matches = filePath.match(/^data:(.+?);base64,(.+)$/)
+    if (matches) {
+      const ext = matches[1].split('/')[1] || 'mp4'
+      const buffer = Buffer.from(matches[2], 'base64')
+      tempInputPath = path.join('/tmp', `input-${Date.now()}.${ext}`)
+      fs.writeFileSync(tempInputPath, buffer)
+      inputPath = tempInputPath
+    }
+  } else if (filePath.startsWith('/') && !filePath.startsWith('http')) {
+    inputPath = path.join(process.cwd(), 'public', filePath)
   }
 
-  // In a real scenario, we'd output to a public dir or upload to cloud storage
-  const outputDir = './public/thumbnails'
+  // Output to /tmp
+  const outputDir = '/tmp' // Vercel writable
   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
+    // /tmp always exists in lambda, but good practice locally
+    try {
+      fs.mkdirSync(outputDir, { recursive: true })
+    } catch (e) {
+      console.error('Failed to create output directory:', e)
+    }
   }
+
   const filename = `thumb-${Date.now()}.png`
   const outputPath = path.join(outputDir, filename)
 
-  return new Promise((resolve, reject) => {
-    ffmpeg(absolutePath)
-      .screenshots({
-        timestamps: ['50%'],
-        filename: filename,
-        folder: outputDir,
-        size: '320x240',
-      })
-      .on('end', () => resolve(outputPath))
-      .on('error', (err) => reject(err))
-  })
+  try {
+    await new Promise((resolve, reject) => {
+      ffmpeg(inputPath)
+        .screenshots({
+          timestamps: ['50%'],
+          filename: filename,
+          folder: outputDir,
+          size: '320x240',
+        })
+        .on('end', resolve)
+        .on('error', reject)
+    })
+
+    // Read result and return as Data URL
+    const imageBuffer = fs.readFileSync(outputPath)
+    const base64 = imageBuffer.toString('base64')
+    return `data:image/png;base64,${base64}`
+  } finally {
+    // Cleanup
+    if (tempInputPath && fs.existsSync(tempInputPath))
+      try {
+        fs.unlinkSync(tempInputPath)
+      } catch (e) {
+        console.error('Failed to delete temp file:', e)
+      }
+    if (fs.existsSync(outputPath))
+      try {
+        fs.unlinkSync(outputPath)
+      } catch (e) {
+        console.error('Failed to delete output file:', e)
+      }
+  }
 }
 
 export const extractAudioSnippet = async (filePath: string) => {
   'use step'
   const { ffmpeg, fs, path } = await setupFfmpeg()
 
-  // Resolve public URL path to absolute file system path
-  let absolutePath = filePath
-  if (filePath.startsWith('/')) {
-    absolutePath = path.join(process.cwd(), 'public', filePath)
+  let inputPath = filePath
+  let tempInputPath: string | null = null
+
+  if (filePath.startsWith('data:')) {
+    const matches = filePath.match(/^data:(.+?);base64,(.+)$/)
+    if (matches) {
+      const ext = matches[1].split('/')[1] || 'mp4'
+      const buffer = Buffer.from(matches[2], 'base64')
+      tempInputPath = path.join('/tmp', `input-${Date.now()}.${ext}`)
+      fs.writeFileSync(tempInputPath, buffer)
+      inputPath = tempInputPath
+    }
+  } else if (filePath.startsWith('/') && !filePath.startsWith('http')) {
+    inputPath = path.join(process.cwd(), 'public', filePath)
   }
 
-  const outputDir = './public/audio'
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
-  }
+  const outputDir = '/tmp'
   const outputPath = path.join(outputDir, `snippet-${Date.now()}.mp3`)
 
-  return new Promise((resolve, reject) => {
-    ffmpeg(absolutePath)
-      .setStartTime(0)
-      .setDuration(30)
-      .output(outputPath)
-      .on('end', () => resolve(outputPath))
-      .on('error', (err) => reject(err))
-      .run()
-  })
+  try {
+    await new Promise((resolve, reject) => {
+      ffmpeg(inputPath)
+        .setStartTime(0)
+        .setDuration(30)
+        .output(outputPath)
+        .on('end', resolve)
+        .on('error', reject)
+        .run()
+    })
+
+    // Read result and return as Data URL
+    const audioBuffer = fs.readFileSync(outputPath)
+    const base64 = audioBuffer.toString('base64')
+    return `data:audio/mp3;base64,${base64}`
+  } finally {
+    if (tempInputPath && fs.existsSync(tempInputPath))
+      try {
+        fs.unlinkSync(tempInputPath)
+      } catch (e) {
+        console.error('Failed to delete temp file:', e)
+      }
+    if (fs.existsSync(outputPath))
+      try {
+        fs.unlinkSync(outputPath)
+      } catch (e) {
+        console.error('Failed to delete output file:', e)
+      }
+  }
 }
