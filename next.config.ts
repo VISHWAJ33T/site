@@ -1,6 +1,7 @@
 import { withContentlayer } from 'next-contentlayer2'
 import createBundleAnalyzer from '@next/bundle-analyzer'
 import type { NextConfig } from 'next'
+import { withWorkflow } from 'workflow/next'
 
 const withBundleAnalyzer = createBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -373,4 +374,4 @@ const buildConfig = (): NextConfig => {
   return plugins.reduce((acc, next) => next(acc), config)
 }
 
-export default buildConfig()
+export default withWorkflow(buildConfig())
