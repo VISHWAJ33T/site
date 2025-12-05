@@ -65,6 +65,12 @@ const config: NextConfig = {
   output,
   basePath,
   reactStrictMode: true,
+  serverExternalPackages: [
+    '@ffmpeg-installer/ffmpeg',
+    '@ffprobe-installer/ffprobe',
+    'puppeteer',
+    '@microfox/puppeteer-sls',
+  ],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {
     dirs: ['app', 'components', 'layouts', 'scripts'],
