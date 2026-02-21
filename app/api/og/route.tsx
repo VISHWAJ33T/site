@@ -2,8 +2,7 @@ import { ImageResponse } from '@vercel/og'
 
 import siteMetadata from '@/data/siteMetadata'
 
-export const runtime = 'edge'
-// Required for static export (output: 'export'); OG images won't run on static hosts like Cloudflare Pages
+// Edge removed for static export (incompatible with force-static). OG images won't run on static hosts.
 export const dynamic = 'force-static'
 
 const interRegular = fetch(
