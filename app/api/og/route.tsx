@@ -3,6 +3,8 @@ import { ImageResponse } from '@vercel/og'
 import siteMetadata from '@/data/siteMetadata'
 
 export const runtime = 'edge'
+// Required for static export (output: 'export'); OG images won't run on static hosts like Cloudflare Pages
+export const dynamic = 'force-static'
 
 const interRegular = fetch(
   new URL('../../../assets/fonts/Inter-Regular.ttf', import.meta.url)

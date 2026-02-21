@@ -8,6 +8,8 @@ import skillsData from 'data/skillsData'
 
 import type { Author, Experience, PortfolioData, Project, Site } from '@/lib/portfolio-types'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   try {
     const authorDetails = allAuthors[0]
