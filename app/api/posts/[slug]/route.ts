@@ -1,10 +1,6 @@
 import { upsertIncreasePostViews } from '@/app/actions'
-// force-static required for static export; view-count API won't run on static hosts (e.g. Cloudflare Pages)
-export const dynamic = 'force-static'
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  return []
-}
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   try {

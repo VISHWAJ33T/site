@@ -1,3 +1,6 @@
+import { readFileSync } from 'fs'
+import path from 'path'
+
 import { ImageResponse } from '@vercel/og'
 
 import siteMetadata from '@/data/siteMetadata'
@@ -5,22 +8,16 @@ import siteMetadata from '@/data/siteMetadata'
 // Edge removed for static export (incompatible with force-static). OG images won't run on static hosts.
 export const dynamic = 'force-static'
 
-const interRegular = fetch(
-  new URL('../../../assets/fonts/Inter-Regular.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
-// const interBold = fetch(new URL('../../../assets/fonts/Inter-Bold.ttf', import.meta.url)).then(
-//   (res) => res.arrayBuffer()
-// )
-
-const interBold = fetch(
-  new URL('../../../assets/fonts/OpenSans-ExtraBold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
+function loadFont(filename: string): ArrayBuffer {
+  const fontPath = path.join(process.cwd(), 'assets', 'fonts', filename)
+  const buffer = readFileSync(fontPath)
+  return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
+}
 
 export async function GET(req: Request) {
   try {
-    const fontRegular = await interRegular
-    const fontBold = await interBold
+    const fontRegular = loadFont('Inter-Regular.ttf')
+    const fontBold = loadFont('OpenSans-ExtraBold.ttf')
     // const fontBold = await interBold
 
     const url = new URL(req.url)
