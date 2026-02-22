@@ -5,8 +5,6 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { Blog } from 'contentlayer/generated'
-import { PostViews } from '@/components/post-views/post-views'
-
 export function Home({
   posts,
   hasMorePosts,
@@ -40,12 +38,6 @@ export function Home({
                           <dt className="sr-only">Published on</dt>
                           <dd className="text-base font-medium text-muted-foreground">
                             <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                          </dd>
-                        </div>
-                        <div className="">
-                          <dt className="sr-only ">View count</dt>
-                          <dd className="flex flex-row items-center gap-1 text-base font-medium text-muted-foreground">
-                            <PostViews slug={slug} />
                           </dd>
                         </div>
                       </dl>
