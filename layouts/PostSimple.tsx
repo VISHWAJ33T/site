@@ -8,8 +8,6 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import { PostViews } from '@/components/post-views/post-views'
-
 interface LayoutProps {
   content: CoreContent<Blog>
   children: ReactNode
@@ -32,12 +30,6 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-sm font-medium text-muted-foreground">
                     <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                  </dd>
-                </div>
-                <div className="">
-                  <dt className="sr-only ">View count</dt>
-                  <dd className="flex flex-row items-center gap-1 text-sm font-medium text-muted-foreground">
-                    <PostViews slug={slug} />
                   </dd>
                 </div>
               </dl>

@@ -9,8 +9,6 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
-import { PostViews } from '@/components/post-views/post-views'
-
 interface PaginationProps {
   totalPages: number
   currentPage: number
@@ -133,12 +131,6 @@ export default function ListLayoutWithTags({
                             {formatDate(date, siteMetadata.locale)}
                           </time>
                         </dd>
-                        <div className="">
-                          <dt className="sr-only ">View count</dt>
-                          <dd className="flex flex-row items-center gap-1 text-sm font-medium text-muted-foreground">
-                            <PostViews slug={slug} />
-                          </dd>
-                        </div>
                       </dl>
                       <div className="space-y-3">
                         <div className="flex flex-col gap-0.5">
