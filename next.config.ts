@@ -58,7 +58,8 @@ const securityHeaders = [
 
 const output = (process.env.EXPORT as 'standalone' | 'export') ?? undefined
 const basePath = process.env.BASE_PATH || undefined
-const unoptimized = process.env.UNOPTIMIZED ? true : undefined
+// Static export has no server: disable Next.js image optimization so images use direct URLs
+const unoptimized = process.env.UNOPTIMIZED === 'true' || output === 'export'
 
 const config: NextConfig = {
   output,
