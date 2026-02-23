@@ -65,6 +65,8 @@ export async function GET() {
 
     return NextResponse.json(data, {
       headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'inline',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type',
