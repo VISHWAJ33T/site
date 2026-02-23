@@ -1,4 +1,0 @@
-# Cloudflare Pages – static Next.js export
-# Tells Cloudflare where the build output is (when dashboard has no "Build output directory" field)
-name = "site"
-pages_build_output_dir = "out"
