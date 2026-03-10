@@ -100,7 +100,7 @@ const experienceData: Experience[] = [
     company: 'Ratnawn-Ai',
     companyUrl: 'https://web.ratnawnai.com',
     logoUrl: '/static/images/experiences/ratnawn-ai-logo.png',
-    period: 'Aug 2025 - Present',
+    period: 'Aug 2025 - Feb 2026',
     location: 'Remote',
     description: [
       'Engineered a 1:1 virtual sales agent that conducts live video calls to sell garments, utilizing Tavus AI for the video agent, Sarvam for TTS & STT, and Gemini as the core reasoning engine.',
