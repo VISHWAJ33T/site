@@ -35,8 +35,9 @@ const projectsData: Project[] = [
       'A multi-agent platform for fashion e-commerce featuring a suite of specialized AI tools. Anchored by a "Smart Model" agent that generates high-fidelity on-model imagery and videos, the ecosystem extends to include utilities for image manipulation, upscaling, speech translation, and product catalog generation.',
     imgSrc: '/static/images/projects/ratnawn-ai.png',
     links: [{ text: 'Live', href: 'https://web.ratnawnai.com' }],
-    badges: ['Multi-Agent', 'Generative AI', 'E-commerce', 'Serverless'],
+    badges: ['Multi-Agent', 'Real-Time AI', 'Generative AI', 'E-commerce', 'Serverless'],
     contribution: [
+      'Developed a real-time 1:1 virtual video sales agent using Tavus AI, Sarvam, and Gemini, orchestrated through LiveKit with capabilities for turn detection, noise cancellation, and RAG-driven product querying.',
       'Architected a responsive system using AWS Lambda and SQS for background processing, coupled with a self-hosted Next.js BFF that consumes webhooks and streams real-time updates to the client via SSE.',
       'Developed the "Smart Model" agent capable of generating consistent 4K model imagery (front/back/side) and videos from garment photos with >95% design accuracy.',
       'Implemented a RAG-based retrieval system to dynamically select tailored, internally maintained models and backgrounds (indoor/outdoor) based on product style.',
