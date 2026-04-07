@@ -34,7 +34,7 @@ const projectsData: Project[] = [
     description:
       'A multi-agent platform for fashion e-commerce featuring a suite of specialized AI tools. Anchored by a "Smart Model" agent that generates high-fidelity on-model imagery and videos, the ecosystem extends to include utilities for image manipulation, upscaling, speech translation, and product catalog generation.',
     imgSrc: '/static/images/projects/ratnawn-ai.png',
-    links: [{ text: 'Live', href: 'https://web.ratnawnai.com' }],
+    links: [{ text: 'Live', href: 'https://ratnawnai.com/' }],
     badges: ['Multi-Agent', 'Real-Time AI', 'Generative AI', 'E-commerce', 'Serverless'],
     contribution: [
       'Developed a real-time 1:1 virtual video sales agent using Tavus AI, Sarvam, and Gemini, orchestrated through LiveKit with capabilities for turn detection, noise cancellation, and RAG-driven product querying.',
@@ -43,6 +43,35 @@ const projectsData: Project[] = [
       'Implemented a RAG-based retrieval system to dynamically select tailored, internally maintained models and backgrounds (indoor/outdoor) based on product style.',
       'Engineered an AI analysis pipeline that extracts product features to auto-generate SEO-rich Excel catalogs.',
       'Integrated a diverse stack of generative tools (Nanobanana, Fal.ai, Flux Kontext, Seeddreams, Recraft Crisp, KlingAI, Replicate) to power specialized image manipulation tasks.',
+    ],
+  },
+  {
+    title: 'MediaMake — AI Video Production Platform',
+    description:
+      'A flagship Microfox product. An AI-powered video production platform that transforms creative briefs into fully rendered professional videos with no manual editing. Built entirely on the @microfox/ai-router and @microfox/ai-worker infrastructure, it automates every stage of the production pipeline from concept to delivery.',
+    imgSrc: '/static/images/projects/mediamake.png',
+    badges: ['Microfox', 'AI', 'Video', 'Remotion', 'Multi-Agent', 'Serverless'],
+    contribution: [
+      'Architected a type-safe JSON → Remotion → Video pipeline where all AI outputs are structured data driving a component system that renders frame-by-frame into professional video.',
+      'Built 13+ specialized AI agents via @microfox/ai-router — including a Video Agent (central orchestrator), Preset Agent (typed component registry interface), Midjourney Agent (video-optimized prompt crafting), Script Agent, Concept Generation Agent, Audio Analysis Agent, and an Autofix Agent for self-healing JSON compositions when rendering fails.',
+      'Engineered 4 background Lambda workers via @microfox/ai-worker (FFprobe media analysis, Puppeteer scraper, Results aggregator, Remotion render worker) dispatched via SQS with a full job store and webhook-on-completion pattern.',
+      'Implemented multi-step production workflows with chain, resume, and loop functions, including human-in-the-loop approval gates that pause execution for creative review before committing to render.',
+      'Shipped a suite of browser extensions (Midjourney, Pinterest, Suno) that automate asset sourcing — programmatically submitting generation prompts, scraping outputs, running audio analysis, and piping results directly into the media pipeline.',
+      'Integrated a usage tracking middleware layer capturing token counts, model costs, image generation credits, and render minutes per account for billing.',
+    ],
+  },
+  {
+    title: 'Writepad — AI Creative Writing IDE',
+    description:
+      'A flagship Microfox product. A professional AI-powered creative writing IDE for novelists, screenwriters, and storytellers. Built entirely on the @microfox/ai-router and @microfox/ai-worker infrastructure — combining a rich writing environment, multi-agent AI assistance, WriteGit version control, and real-time collaboration. Think: Cursor for writers.',
+    imgSrc: '/static/images/projects/writepad.png',
+    badges: ['Microfox', 'AI', 'Writing', 'Collaboration', 'Version Control', 'Real-Time'],
+    contribution: [
+      'Built a project-based writing environment on CodeMirror 6 with ghost-text AI autocomplete, a per-project .writepad rules file for consistent style/voice enforcement, and a file/folder tree for chapters, scenes, and notes.',
+      'Engineered a multi-agent AI system via @microfox/ai-router — Editor, Continuity, Outliner, Dialogue, Research, Critique, and Synopsis agents powered by Gemini 2.5 Pro — with a chat panel that proposes all changes as structured diff blocks (accept/reject per hunk).',
+      'Designed WriteGit — a version control system purpose-built for prose — supporting commits, branches, prose-aware side-by-side diffs, three-way merge with AI-assisted conflict resolution, and full project history rollback per branch.',
+      'Implemented real-time collaborative editing with operational transformation (no conflicts, no last-save-wins), shared AI chat visible to all collaborators, color-coded cursor presence, and a branch-protection permission model.',
+      'Built 6 background Lambda workers via @microfox/ai-worker (Manuscript Analyzer, Style Consistency Pass, Chapter Summarizer, World Bible Builder, Continuity Tracker, Batch Rewriter) chained into multi-step workflows with HITL approval gates.',
     ],
   },
   {
