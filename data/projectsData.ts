@@ -50,6 +50,7 @@ const projectsData: Project[] = [
     description:
       'A flagship Microfox product. A professional AI-powered creative writing IDE for novelists, screenwriters, and storytellers. Built entirely on the @microfox/ai-router and @microfox/ai-worker infrastructure — combining a rich writing environment, multi-agent AI assistance, WriteGit version control, and real-time collaboration. Think: Cursor for writers.',
     imgSrc: '/static/images/projects/writepad.png',
+    links: [{ text: 'Live', href: 'https://writepad-ide.vercel.app/' }],
     badges: ['AI', 'Writing', 'Web IDE', 'Collaboration', 'Version Control'],
     contribution: [
       'Built a project-based writing environment on CodeMirror 6 with ghost-text AI autocomplete, a per-project .writepad rules file for consistent style/voice enforcement, and a file/folder tree for chapters, scenes, and notes.',
@@ -64,6 +65,7 @@ const projectsData: Project[] = [
     description:
       'A flagship Microfox product. An AI-powered video production platform that transforms creative briefs into fully rendered professional videos with no manual editing. Built entirely on the @microfox/ai-router and @microfox/ai-worker infrastructure, it automates every stage of the production pipeline from concept to delivery.',
     imgSrc: '/static/images/projects/mediamake.png',
+    links: [{ text: 'GitHub', href: 'https://github.com/microfox-ai/mediamake' }],
     badges: ['AI', 'Video Editor', 'Remotion', 'Multi-Agent'],
     contribution: [
       'Architected a type-safe JSON → Remotion → Video pipeline where all AI outputs are structured data driving a component system that renders frame-by-frame into professional video.',
